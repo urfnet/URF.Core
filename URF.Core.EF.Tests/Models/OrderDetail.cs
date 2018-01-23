@@ -1,0 +1,19 @@
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace URF.Core.EF.Tests.Models
+{
+    public partial class OrderDetail
+    {
+        [Key, Column(Order = 1)]
+        public int OrderDetailId { get; set; }
+        public int OrderId { get; set; }
+        [ForeignKey(nameof(OrderId))]
+        public Order Order { get; set; }
+        public int ProductId { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        public Product Product { get; set; }
+        public decimal UnitPrice { get; set; }
+        public double Quantity { get; set; }
+    }
+}
