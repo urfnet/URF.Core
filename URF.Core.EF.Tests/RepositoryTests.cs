@@ -9,21 +9,26 @@ namespace URF.Core.EF.Tests
     [Collection(nameof(NorthwindDbContext))]
     public class RepositoryTests
     {
+        private readonly List<Category> _categories;
         private readonly List<Product> _products;
         private readonly NorthwindDbContextFixture _fixture;
 
         public RepositoryTests(NorthwindDbContextFixture fixture)
         {
+            _categories = new List<Category>
+            {
+                new Category { CategoryId = 1, CategoryName = "Beverages"},
+            };
             _products = new List<Product>
             {
                 new Product { ProductId = 1, ProductName = "Product 1", UnitPrice = 10, CategoryId = 1 },
                 new Product { ProductId = 2, ProductName = "Product 2", UnitPrice = 20, CategoryId = 1 },
-                new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 }
+                new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
             };
             _fixture = fixture;
             _fixture.Initialize(true, async () =>
             {
-                _fixture.Context.Categories.Add(new Category { CategoryId = 1, CategoryName = "Beverages"});
+                _fixture.Context.Categories.AddRange(_categories);
                 _fixture.Context.Products.AddRange(_products);
                 await _fixture.Context.SaveChangesAsync();
             });
@@ -116,6 +121,27 @@ namespace URF.Core.EF.Tests
 
             // Assert
             Assert.False(result);
+        }
+
+        [Fact]
+        public async Task LoadPropertyAsync_Should_Load_Property()
+        {
+            // Arrange
+            var product = new Product
+            {
+                ProductId = 4,
+                ProductName = "Product 4",
+                UnitPrice = 40,
+                CategoryId = 1
+            };
+            var repository = new Repository<Product>(_fixture.Context);
+            repository.Attach(product);
+
+            // Act
+            await repository.LoadPropertyAsync(product, p => p.Category);
+
+            // Assert
+            Assert.NotNull(product.Category);
         }
     }
 }
