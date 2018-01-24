@@ -37,10 +37,14 @@ namespace URF.Core.EF
             return item != null;
         }
 
-        public virtual async Task<bool> ExistsAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default) => await ExistsAsync(new object[] {keyValue}, cancellationToken);
+        public virtual async Task<bool> ExistsAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
+            => await ExistsAsync(new object[] {keyValue}, cancellationToken);
 
         public virtual async Task LoadPropertyAsync(TEntity item, Expression<Func<TEntity, object>> property, CancellationToken cancellationToken = default)
             => await Context.Entry(item).Reference(property).LoadAsync(cancellationToken);
+
+        public virtual void Attach(TEntity item)
+            => Set.Attach(item);
 
         public virtual void Insert(TEntity item)
             => Context.Entry(item).State = EntityState.Added;
@@ -56,6 +60,7 @@ namespace URF.Core.EF
             return true;
         }
 
-        public virtual async Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default) => await DeleteAsync(new object[] { keyValue }, cancellationToken);
+        public virtual async Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
+            => await DeleteAsync(new object[] { keyValue }, cancellationToken);
     }
 }
