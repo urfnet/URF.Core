@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\URF.Core.Abstractions.Queryable\URF.Core.Abstractions.Queryable.csproj" />
     <ProjectReference Include="..\URF.Core.Abstractions\URF.Core.Abstractions.csproj" />
+    <ProjectReference Include="..\URF.Core.EF.Queryable\URF.Core.EF.Queryable.csproj" />
     <ProjectReference Include="..\URF.Core.EF\URF.Core.EF.csproj" />
   </ItemGroup>
 

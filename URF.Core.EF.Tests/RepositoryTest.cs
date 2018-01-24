@@ -51,22 +51,6 @@ namespace URF.Core.EF.Tests
                 p => Assert.Equal(_products[2].ProductId, p.ProductId));
         }
 
-        [Fact]
-        public async Task SelectSqlAsync_Should_Return_Entities()
-        {
-            // Arrange
-            var repository = new Repository<Product>(_fixture.Context);
-
-            // Act
-            var products = await repository.SelectSqlAsync("SELECT * FROM Products");
-
-            // Assert
-            Assert.Collection(products,
-                p => Assert.Equal(_products[0].ProductId, p.ProductId),
-                p => Assert.Equal(_products[1].ProductId, p.ProductId),
-                p => Assert.Equal(_products[2].ProductId, p.ProductId));
-        }
-
         [Theory]
         [InlineData(false)]
         [InlineData(true)]

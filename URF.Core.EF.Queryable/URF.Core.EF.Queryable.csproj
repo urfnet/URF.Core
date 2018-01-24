@@ -2,20 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.1" />
-    <PackageReference Include="TrackableEntities.Common.Core" Version="1.0.0-beta" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\URF.Core.Abstractions.Queryable\URF.Core.Abstractions.Queryable.csproj" />
-    <ProjectReference Include="..\URF.Core.Abstractions.Trackable\URF.Core.Abstractions.Trackable.csproj" />
     <ProjectReference Include="..\URF.Core.Abstractions\URF.Core.Abstractions.csproj" />
-    <ProjectReference Include="..\URF.Core.EF.Queryable\URF.Core.EF.Queryable.csproj" />
     <ProjectReference Include="..\URF.Core.EF\URF.Core.EF.csproj" />
   </ItemGroup>
 
