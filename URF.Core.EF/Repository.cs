@@ -46,6 +46,9 @@ namespace URF.Core.EF
         public virtual void Attach(TEntity item)
             => Set.Attach(item);
 
+        public virtual void Detach(TEntity item)
+            => Context.Entry(item).State = EntityState.Detached;
+
         public virtual void Insert(TEntity item)
             => Context.Entry(item).State = EntityState.Added;
 

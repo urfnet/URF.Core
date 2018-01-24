@@ -16,6 +16,7 @@ namespace Urf.Core.Abstractions
         Task<bool> ExistsAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
         Task LoadPropertyAsync(TEntity item, Expression<Func<TEntity, object>> property, CancellationToken cancellationToken = default);
         void Attach(TEntity item);
+        void Detach(TEntity item);
         void Insert(TEntity item);
         void Update(TEntity item);
         Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default);
