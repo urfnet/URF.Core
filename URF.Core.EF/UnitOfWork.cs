@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -29,5 +30,8 @@ namespace URF.Core.EF
 
         public virtual async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
             => await Context.SaveChangesAsync(cancellationToken);
+
+        public virtual async Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default)
+            => await Context.Database.ExecuteSqlCommandAsync(sql, parameters, cancellationToken);
     }
 }
