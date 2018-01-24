@@ -29,7 +29,7 @@ namespace URF.Core.EF
             => await Set.FindAsync((object[])keyValues, cancellationToken);
 
         public virtual async Task<TEntity> FindAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
-            => await FindAsync((object[])new object[] { keyValue }, cancellationToken);
+            => await FindAsync(new object[] { keyValue }, cancellationToken);
 
         public virtual async Task<bool> ExistsAsync(object[] keyValues, CancellationToken cancellationToken = default)
         {
