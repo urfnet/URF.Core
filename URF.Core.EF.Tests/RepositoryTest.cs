@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using Xunit;
@@ -7,13 +8,13 @@ using Xunit;
 namespace URF.Core.EF.Tests
 {
     [Collection(nameof(NorthwindDbContext))]
-    public class RepositoryTests
+    public class RepositoryTest
     {
         private readonly List<Category> _categories;
         private readonly List<Product> _products;
         private readonly NorthwindDbContextFixture _fixture;
 
-        public RepositoryTests(NorthwindDbContextFixture fixture)
+        public RepositoryTest(NorthwindDbContextFixture fixture)
         {
             _categories = new List<Category>
             {
@@ -134,14 +135,121 @@ namespace URF.Core.EF.Tests
                 UnitPrice = 40,
                 CategoryId = 1
             };
+            _fixture.Context.Products.Attach(product);
             var repository = new Repository<Product>(_fixture.Context);
-            repository.Attach(product);
 
             // Act
             await repository.LoadPropertyAsync(product, p => p.Category);
 
             // Assert
-            Assert.NotNull(product.Category);
+            Assert.Same(_categories[0], product.Category);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void Attach_Should_Set_Entity_State_Unchanged(bool attach)
+        {
+            // Arrange
+            var product = new Product
+            {
+                ProductId = 4,
+                ProductName = "Product 4",
+                UnitPrice = 40,
+                CategoryId = 1
+            };
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            if (attach)
+                repository.Attach(product);
+
+            // Assert
+            Assert.Equal(attach ? EntityState.Unchanged : EntityState.Detached, _fixture.Context.Entry(product).State);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void Detach_Should_Set_Entity_State_Detached(bool detach)
+        {
+            // Arrange
+            var product = new Product
+            {
+                ProductId = 4,
+                ProductName = "Product 4",
+                UnitPrice = 40,
+                CategoryId = 1
+            };
+            _fixture.Context.Products.Attach(product);
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            if (detach)
+                repository.Detach(product);
+
+            // Assert
+            Assert.Equal(detach ? EntityState.Detached : EntityState.Unchanged, _fixture.Context.Entry(product).State);
+        }
+
+        [Fact]
+        public void Insert_Should_Set_Entity_State_Added()
+        {
+            // Arrange
+            var product = new Product
+            {
+                ProductId = 4,
+                ProductName = "Product 4",
+                UnitPrice = 40,
+                CategoryId = 1
+            };
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            repository.Insert(product);
+
+            // Assert
+            Assert.Equal(EntityState.Added, _fixture.Context.Entry(product).State);
+        }
+
+        [Fact]
+        public void Update_Should_Set_Entity_State_Modified()
+        {
+            // Arrange
+            var product = new Product
+            {
+                ProductId = 4,
+                ProductName = "Product 4",
+                UnitPrice = 40,
+                CategoryId = 1
+            };
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            repository.Update(product);
+
+            // Assert
+            Assert.Equal(EntityState.Modified, _fixture.Context.Entry(product).State);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public async Task DeleteAsync_Should_Set_Entity_State_Deleted(bool useKey)
+        {
+            // Arrange
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            bool result;
+            if (useKey)
+                result = await repository.DeleteAsync(1);
+            else
+                result = await repository.DeleteAsync(new object[] { 1 });
+
+            // Assert
+            Assert.True(result);
+            Assert.Equal(EntityState.Deleted, _fixture.Context.Entry(_products[0]).State);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace URF.Core.EF
         {
             if (Repositories.TryGetValue(typeof(IRepository<TEntity>), out var repository) && repository is IRepository<TEntity>)
                 return (IRepository<TEntity>) repository;
-            var repository1 = Activator.CreateInstance<IRepository<TEntity>>();
+            var repository1 = (IRepository<TEntity>)Activator.CreateInstance(typeof(Repository<TEntity>), Context);
             Repositories.TryAdd(typeof(IRepository<TEntity>), repository1);
             return repository1;
         }
