@@ -22,8 +22,8 @@ namespace URF.Core.EF
         public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
             => await Set.ToListAsync(cancellationToken);
 
-        public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string query, CancellationToken cancellationToken = default)
-            => await Set.FromSql(query).ToListAsync(cancellationToken);
+        public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
+            => await Set.FromSql(sql, (object[])parameters).ToListAsync(cancellationToken);
 
         public virtual async Task<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken = default)
             => await Set.FindAsync((object[])keyValues, cancellationToken);
