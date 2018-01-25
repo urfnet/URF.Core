@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TrackableEntities.Common.Core;
+using TrackableEntities.EF.Core;
 using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Queryable;
 
@@ -13,24 +15,33 @@ namespace URF.Core.EF.Trackable
         {
         }
 
-        public virtual void ApplyChanges(params TEntity[] entity)
+        public override void Insert(TEntity item)
+            => item.TrackingState = TrackingState.Added;
+
+        public override void Update(TEntity item)
+            => item.TrackingState = TrackingState.Modified;
+
+        public override void Delete(TEntity item)
+            => item.TrackingState = TrackingState.Deleted;
+
+        public override async Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default)
         {
-            throw new System.NotImplementedException();
+            var item = await FindAsync(keyValues, cancellationToken);
+            if (item == null) return false;
+                item.TrackingState = TrackingState.Deleted;
+            return true;
         }
 
-        public virtual void AcceptChanges(params TEntity[] entity)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void ApplyChanges(params TEntity[] entities)
+            => Context.ApplyChanges(entities);
 
-        public virtual void DetachEntities(params TEntity[] entity)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void AcceptChanges(params TEntity[] entities)
+            => Context.AcceptChanges(entities);
 
-        public virtual void LoadRelatedEntities(params TEntity[] entity)
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void DetachEntities(params TEntity[] entities)
+            => Context.DetachEntities(entities);
+
+        public virtual async Task LoadRelatedEntities(params TEntity[] entities)
+            => await Context.LoadRelatedEntitiesAsync(entities);
     }
 }

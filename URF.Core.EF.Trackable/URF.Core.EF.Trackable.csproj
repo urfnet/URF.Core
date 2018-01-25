@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.1" />
     <PackageReference Include="TrackableEntities.Common.Core" Version="1.0.0-beta" />
+    <PackageReference Include="TrackableEntities.EF.Core" Version="1.0.0-beta" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,10 @@
     <ProjectReference Include="..\URF.Core.Abstractions\URF.Core.Abstractions.csproj" />
     <ProjectReference Include="..\URF.Core.EF.Queryable\URF.Core.EF.Queryable.csproj" />
     <ProjectReference Include="..\URF.Core.EF\URF.Core.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

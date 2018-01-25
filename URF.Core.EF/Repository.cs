@@ -55,6 +55,9 @@ namespace URF.Core.EF
         public virtual void Update(TEntity item)
             => Context.Entry(item).State = EntityState.Modified;
 
+        public virtual void Delete(TEntity item)
+            => Context.Entry(item).State = EntityState.Deleted;
+
         public virtual async Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default)
         {
             var item = await FindAsync(keyValues, cancellationToken);

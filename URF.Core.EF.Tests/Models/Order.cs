@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using URF.Core.EF.Trackable;
 
 namespace URF.Core.EF.Tests.Models
 {
-    public partial class Order
+    public partial class Order : Entity
     {
         [Key]
         public int OrderId { get; set; }
