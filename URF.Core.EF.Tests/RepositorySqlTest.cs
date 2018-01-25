@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using Xunit;

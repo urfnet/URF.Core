@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using URF.Core.EF.Trackable;
 
 namespace URF.Core.EF.Tests.Models
 {
-    public partial class Product
+    public partial class Product : Entity
     {
         [Key]
         public int ProductId { get; set; }

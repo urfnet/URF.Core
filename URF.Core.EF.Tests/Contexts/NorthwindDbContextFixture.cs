@@ -30,7 +30,7 @@ namespace URF.Core.EF.Tests.Contexts
                     .Options;
             }
             _context = new NorthwindDbContext(_options);
-            _context.Database.EnsureCreated(); // If login error, manually create NorthwindUrfTestDb database
+            _context.Database.EnsureCreated(); // If login error, manually create database
             seedData?.Invoke();
         }
 

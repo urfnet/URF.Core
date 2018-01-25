@@ -27,11 +27,11 @@ namespace URF.Core.EF.Tests
                 new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
             };
             _fixture = fixture;
-            _fixture.Initialize(true, async () =>
+            _fixture.Initialize(true, () =>
             {
                 _fixture.Context.Categories.AddRange(_categories);
                 _fixture.Context.Products.AddRange(_products);
-                await _fixture.Context.SaveChangesAsync();
+                _fixture.Context.SaveChanges();
             });
         }
 

@@ -19,6 +19,7 @@ namespace Urf.Core.Abstractions
         void Detach(TEntity item);
         void Insert(TEntity item);
         void Update(TEntity item);
+        void Delete(TEntity item);
         Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default);
         Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
     }

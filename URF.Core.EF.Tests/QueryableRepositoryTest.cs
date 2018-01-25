@@ -27,11 +27,11 @@ namespace URF.Core.EF.Tests
                 new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
             };
             _fixture = fixture;
-            _fixture.Initialize(true, async () =>
+            _fixture.Initialize(true, () =>
             {
                 _fixture.Context.Categories.AddRange(categories);
                 _fixture.Context.Products.AddRange(products);
-                await _fixture.Context.SaveChangesAsync();
+                _fixture.Context.SaveChanges();
             });
         }
 
@@ -46,35 +46,6 @@ namespace URF.Core.EF.Tests
 
             // Act
             var query = repository.Queryable();
-            var products = await query
-                .Include(p => p.Category)
-                .Where(p => p.UnitPrice > 15)
-                .Select(p => new MyProduct
-                {
-                    Id = p.ProductId,
-                    Name = p.ProductName,
-                    Price = p.UnitPrice,
-                    Category = p.Category.CategoryName
-                })
-                .ToListAsync();
-
-            // Assert
-            Assert.Collection(products,
-                p => Assert.Equal(expected1, p, comparer),
-                p => Assert.Equal(expected2, p, comparer));
-        }
-
-        [Fact(Skip = "Skip")]
-        public async Task QueryableSql_Should_Allow_Composition()
-        {
-            // Arrange
-            var comparer = new MyProductComparer();
-            var expected1 = new MyProduct { Id = 2, Name = "Product 2", Price = 20, Category = "Beverages" };
-            var expected2 = new MyProduct { Id = 3, Name = "Product 3", Price = 30, Category = "Beverages" };
-            var repository = new QueryableRepository<Product>(_fixture.Context);
-
-            // Act
-            var query = repository.QueryableSql("SELECT ");
             var products = await query
                 .Include(p => p.Category)
                 .Where(p => p.UnitPrice > 15)
