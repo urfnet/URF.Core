@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using URF.Core.EF.Tests.Contexts;
@@ -234,6 +235,35 @@ namespace URF.Core.EF.Tests
             // Assert
             Assert.True(result);
             Assert.Equal(EntityState.Deleted, _fixture.Context.Entry(_products[0]).State);
+        }
+
+        [Fact]
+        public async Task Queryable_Should_Allow_Composition()
+        {
+            // Arrange
+            var comparer = new MyProductComparer();
+            var expected1 = new MyProduct { Id = 2, Name = "Product 2", Price = 20, Category = "Beverages" };
+            var expected2 = new MyProduct { Id = 3, Name = "Product 3", Price = 30, Category = "Beverages" };
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            var query = repository.Queryable();
+            var products = await query
+                .Include(p => p.Category)
+                .Where(p => p.UnitPrice > 15)
+                .Select(p => new MyProduct
+                {
+                    Id = p.ProductId,
+                    Name = p.ProductName,
+                    Price = p.UnitPrice,
+                    Category = p.Category.CategoryName
+                })
+                .ToListAsync();
+
+            // Assert
+            Assert.Collection(products,
+                p => Assert.Equal(expected1, p, comparer),
+                p => Assert.Equal(expected2, p, comparer));
         }
     }
 }

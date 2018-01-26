@@ -4,11 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using TrackableEntities.Common.Core;
 using TrackableEntities.EF.Core;
 using URF.Core.Abstractions.Trackable;
-using URF.Core.EF.Queryable;
 
 namespace URF.Core.EF.Trackable
 {
-    public class TrackableRepository<TEntity> : QueryableRepository<TEntity>, ITrackableRepository<TEntity>
+    public class TrackableRepository<TEntity> : Repository<TEntity>, ITrackableRepository<TEntity>
         where TEntity : class, ITrackable
     {
         public TrackableRepository(DbContext context) : base(context)

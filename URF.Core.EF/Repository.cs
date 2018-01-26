@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -68,5 +69,10 @@ namespace URF.Core.EF
 
         public virtual async Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
             => await DeleteAsync(new object[] { keyValue }, cancellationToken);
+
+        public virtual IQueryable<TEntity> Queryable() => Set;
+
+        public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
+            => Set.FromSql(sql, parameters);
     }
 }
