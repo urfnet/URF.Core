@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,5 +23,7 @@ namespace Urf.Core.Abstractions
         void Delete(TEntity item);
         Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default);
         Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
+        IQueryable<TEntity> Queryable();
+        IQueryable<TEntity> QueryableSql(string sql, params object[] parameters);
     }
 }
