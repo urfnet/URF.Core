@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Urf.Core.Abstractions;
+using URF.Core.Abstractions;
 
 namespace URF.Core.EF
 {
@@ -14,15 +15,17 @@ namespace URF.Core.EF
     {
         protected DbContext Context { get; }
         protected DbSet<TEntity> Set { get; }
+        private readonly RepositoryFluent<TEntity> _repositoryFluent;
 
         public Repository(DbContext context)
         {
             Context = context;
             Set = context.Set<TEntity>();
+            _repositoryFluent = new RepositoryFluent<TEntity>(this);
         }
 
         public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
-            => await Set.ToListAsync(cancellationToken);
+            => await SelectAsync(null, null, null, null, null, cancellationToken);
 
         public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
             => await Set.FromSql(sql, (object[])parameters).ToListAsync(cancellationToken);
@@ -79,7 +82,7 @@ namespace URF.Core.EF
         public virtual async Task<IEnumerable<TEntity>> SelectAsync(
             Expression<Func<TEntity, bool>> filter = null,
             Expression<Func<TEntity, object>>[] includes = null,
-            SortExpression<TEntity>[] sortExpressions = null,
+            ISortExpression<TEntity>[] sortExpressions = null,
             int? page = null,
             int? pageSize = null,
             CancellationToken cancellationToken = default)
@@ -113,17 +116,10 @@ namespace URF.Core.EF
 
             return await query.ToListAsync(cancellationToken);
         }
-    }
 
-    public class SortExpression<TEntity> where TEntity : class
-    {
-        public SortExpression(Expression<Func<TEntity, object>> sortBy, ListSortDirection sortDirection)
+        public virtual IRepositoryFluent<TEntity> Query()
         {
-            SortBy = sortBy;
-            SortDirection = sortDirection;
+            return _repositoryFluent;
         }
-
-        public Expression<Func<TEntity, object>> SortBy { get; set; }
-        public ListSortDirection SortDirection { get; set; }
     }
 }

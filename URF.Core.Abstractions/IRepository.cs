@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using URF.Core.Abstractions;
 
 namespace Urf.Core.Abstractions
 {
@@ -25,5 +26,13 @@ namespace Urf.Core.Abstractions
         Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
         IQueryable<TEntity> Queryable();
         IQueryable<TEntity> QueryableSql(string sql, params object[] parameters);
+        Task<IEnumerable<TEntity>> SelectAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            Expression<Func<TEntity, object>>[] includes = null,
+            ISortExpression<TEntity>[] sortExpressions = null,
+            int? page = null,
+            int? pageSize = null,
+            CancellationToken cancellationToken = default);
+        IRepositoryFluent<TEntity> Query();
     }
 }

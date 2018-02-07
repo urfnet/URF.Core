@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using URF.Core.Abstractions;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using Xunit;
@@ -257,7 +258,7 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
-        public async Task Paging()
+        public async Task Paging_Should_Return_Page()
         {
             var repository = new Repository<Product>(_fixture.Context);
 
@@ -279,9 +280,10 @@ namespace URF.Core.EF.Tests
                 .SelectAsync(
                     filter: p => p.CategoryId == 1 || p.CategoryId == 2,
                     includes: new Expression<Func<Product, object>>[] { p => p.Category },
-                    sortExpressions: new[] { new SortExpression<Product>(p => p.ProductName, ListSortDirection.Descending) },
+                    sortExpressions: new ISortExpression<Product>[] { new SortExpression<Product>(p => p.ProductName, ListSortDirection.Descending) },
                     page: 2,
-                    pageSize:10);
+                    pageSize:10,
+                    cancellationToken: default);
 
             var enumerable = products as Product[] ?? products.ToArray();
 
@@ -300,7 +302,54 @@ namespace URF.Core.EF.Tests
                 p => Assert.Equal(expected[8].ProductId, p.ProductId),
                 p => Assert.Equal(expected[9].ProductId, p.ProductId)
             );
-        } 
+        }
+
+        [Fact]
+        public async Task Paging_Fluent_Should_Return_Page()
+        {
+            var repository = new Repository<Product>(_fixture.Context);
+
+            var expected = new[]
+            {
+                new Product {ProductId = 67, ProductName = "Laughing Lumberjack Lager", CategoryId = 1, UnitPrice = 14.00m, Discontinued = false},
+                new Product {ProductId = 76, ProductName = "Lakkalikööri", CategoryId = 1, UnitPrice = 18.00m, Discontinued = false},
+                new Product {ProductId = 43, ProductName = "Ipoh Coffee", CategoryId = 1, UnitPrice = 46.00m, Discontinued = false},
+                new Product {ProductId = 44, ProductName = "Gula Malacca", CategoryId = 2, UnitPrice = 19.45m, Discontinued = false},
+                new Product {ProductId = 24, ProductName = "Guaraná Fantástica", CategoryId = 1, UnitPrice = 4.50m, Discontinued = true},
+                new Product {ProductId = 6, ProductName = "Grandma's Boysenberry Spread", CategoryId = 2, UnitPrice = 25.00m, Discontinued = false},
+                new Product {ProductId = 15, ProductName = "Genen Shouyu", CategoryId = 2, UnitPrice = 15.50m, Discontinued = false},
+                new Product {ProductId = 38, ProductName = "Côte de Blaye", CategoryId = 1, UnitPrice = 263.50m, Discontinued = false},
+                new Product {ProductId = 5, ProductName = "Chef Anton's Gumbo Mix", CategoryId = 2, UnitPrice = 21.35m, Discontinued = true},
+                new Product {ProductId = 4, ProductName = "Chef Anton's Cajun Seasoning", CategoryId = 2, UnitPrice = 22.00m, Discontinued = false}
+            };
+
+            var products = await repository
+                .Query()
+                .Filter(p => p.CategoryId == 1 || p.CategoryId == 2)
+                .Include(p => p.Category)
+                .OrderByDescending(p => p.ProductName)
+                .Page(2)
+                .PageSize(10)
+                .SelectAsync();
+
+            var enumerable = products as Product[] ?? products.ToArray();
+
+            Assert.NotEmpty(enumerable);
+            Assert.Equal(10, enumerable.Count());
+
+            Assert.Collection(enumerable,
+                p => Assert.Equal(expected[0].ProductId, p.ProductId),
+                p => Assert.Equal(expected[1].ProductId, p.ProductId),
+                p => Assert.Equal(expected[2].ProductId, p.ProductId),
+                p => Assert.Equal(expected[3].ProductId, p.ProductId),
+                p => Assert.Equal(expected[4].ProductId, p.ProductId),
+                p => Assert.Equal(expected[5].ProductId, p.ProductId),
+                p => Assert.Equal(expected[6].ProductId, p.ProductId),
+                p => Assert.Equal(expected[7].ProductId, p.ProductId),
+                p => Assert.Equal(expected[8].ProductId, p.ProductId),
+                p => Assert.Equal(expected[9].ProductId, p.ProductId)
+            );
+        }
 
         [Fact]
         public async Task Queryable_Should_Allow_Composition()
