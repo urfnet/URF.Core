@@ -98,12 +98,11 @@ namespace URF.Core.EF
                 IOrderedQueryable<TEntity> orderedQuery = null;
 
                 for (var i = 0; i < sortExpressions.Count(); i++)
-                {
-                    if (sortExpressions[i].SortDirection == ListSortDirection.Ascending)
-                        orderedQuery = i == 0 ? query.OrderBy(sortExpressions[i].SortBy) : orderedQuery.ThenBy(sortExpressions[i].SortBy);
-                    else
-                        orderedQuery = i == 0 ? query.OrderByDescending(sortExpressions[i].SortBy) : orderedQuery.ThenByDescending(sortExpressions[i].SortBy);
-                }
+                    orderedQuery = sortExpressions[i].SortDirection == ListSortDirection.Ascending 
+                        ? (i == 0 ? query.OrderBy(sortExpressions[i].SortBy) 
+                            : orderedQuery.ThenBy(sortExpressions[i].SortBy)) 
+                        : (i == 0 ? query.OrderByDescending(sortExpressions[i].SortBy) 
+                            : orderedQuery.ThenByDescending(sortExpressions[i].SortBy));
 
                 if (pageSize.HasValue && page.HasValue)
                     query = orderedQuery.Skip((page.Value - 1) * pageSize.Value);
