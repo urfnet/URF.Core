@@ -285,6 +285,7 @@ namespace URF.Core.EF.Tests
 
             var enumerable = products as Product[] ?? products.ToArray();
 
+            Assert.NotEmpty(enumerable);
             Assert.Equal(10, enumerable.Count());
 
             Assert.Collection(enumerable, 
