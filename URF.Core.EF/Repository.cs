@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -74,5 +75,56 @@ namespace URF.Core.EF
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
             => Set.FromSql(sql, parameters);
+
+        public virtual async Task<IEnumerable<TEntity>> SelectAsync(
+            Expression<Func<TEntity, bool>> filter = null,
+            Expression<Func<TEntity, object>>[] includes = null,
+            SortExpression<TEntity>[] sortExpressions = null,
+            int? page = null,
+            int? pageSize = null,
+            CancellationToken cancellationToken = default)
+        {
+            IQueryable<TEntity> query = Set;
+
+            if (filter != null)
+                query = query.Where(filter);
+
+            if (includes != null)
+                foreach (var include in includes)
+                    query.Include(include);
+
+            if (sortExpressions != null)
+            {
+                IOrderedQueryable<TEntity> orderedQuery = null;
+
+                for (var i = 0; i < sortExpressions.Count(); i++)
+                {
+                    if (sortExpressions[i].SortDirection == ListSortDirection.Ascending)
+                        orderedQuery = i == 0 ? query.OrderBy(sortExpressions[i].SortBy) : orderedQuery.ThenBy(sortExpressions[i].SortBy);
+                    else
+                        orderedQuery = i == 0 ? query.OrderByDescending(sortExpressions[i].SortBy) : orderedQuery.ThenByDescending(sortExpressions[i].SortBy);
+                }
+
+                if (pageSize.HasValue && page.HasValue)
+                    query = orderedQuery.Skip((page.Value - 1) * pageSize.Value);
+            }
+
+            if (pageSize.HasValue)
+                query = query.Take(pageSize.Value);
+
+            return await query.ToListAsync(cancellationToken);
+        }
+    }
+
+    public class SortExpression<TEntity> where TEntity : class
+    {
+        public SortExpression(Expression<Func<TEntity, object>> sortBy, ListSortDirection sortDirection)
+        {
+            SortBy = sortBy;
+            SortDirection = sortDirection;
+        }
+
+        public Expression<Func<TEntity, object>> SortBy { get; set; }
+        public ListSortDirection SortDirection { get; set; }
     }
 }
