@@ -10,7 +10,7 @@ using URF.Core.Abstractions;
 
 namespace URF.Core.EF
 {
-    class Query<TEntity> : IQuery<TEntity> where TEntity : class
+    public class Query<TEntity> : IQuery<TEntity> where TEntity : class
     {
         private int? _skip;
         private int? _take;
@@ -22,55 +22,55 @@ namespace URF.Core.EF
             _queryable = repository.Queryable();
         }
 
-        public IQuery<TEntity> Where(Expression<Func<TEntity, bool>> filter)
+        public virtual IQuery<TEntity> Where(Expression<Func<TEntity, bool>> filter)
         {
             _queryable =_queryable.Where(filter);
             return this;
         }
 
-        public IQuery<TEntity> Include(Expression<Func<TEntity, object>> include)
+        public virtual IQuery<TEntity> Include(Expression<Func<TEntity, object>> include)
         {
             _queryable =_queryable.Include(include);
             return this;
         }
 
-        public IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> orderBy)
+        public virtual IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> orderBy)
         {
             if (_orderedQuery == null) _orderedQuery = _queryable.OrderBy(orderBy);
             else _orderedQuery.OrderBy(orderBy);
             return this;
         }
 
-        public IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy)
+        public virtual IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy)
         {
             _orderedQuery.ThenBy(thenBy);
             return this;
         }
 
-        public IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> orderByDescending)
+        public virtual IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> orderByDescending)
         {
             if (_orderedQuery == null) _orderedQuery = _queryable.OrderByDescending(orderByDescending);
             else _orderedQuery.OrderByDescending(orderByDescending);
             return this;
         }
-        public IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> thenByDescending)
+        public virtual IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> thenByDescending)
         {
             _orderedQuery.ThenByDescending(thenByDescending);
             return this;
         }
 
-        public async Task<int> CountAsync(CancellationToken cancellationToken = default )
+        public virtual async Task<int> CountAsync(CancellationToken cancellationToken = default )
         {
             return await _queryable.CountAsync(cancellationToken);
         }
 
-        public IQuery<TEntity> Skip(int skip)
+        public virtual IQuery<TEntity> Skip(int skip)
         {
             _skip = skip;
             return this;
         }
 
-        public IQuery<TEntity> Take(int take)
+        public virtual IQuery<TEntity> Take(int take)
         {
             _take = take;
             return this;
