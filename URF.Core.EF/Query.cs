@@ -37,28 +37,28 @@ namespace URF.Core.EF
             return this;
         }
 
-        public IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> sortBy)
+        public IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> orderBy)
         {
-            if (_orderedQuery == null) _orderedQuery = _queryable.OrderBy(sortBy);
-            else _orderedQuery.OrderBy(sortBy);
+            if (_orderedQuery == null) _orderedQuery = _queryable.OrderBy(orderBy);
+            else _orderedQuery.OrderBy(orderBy);
             return this;
         }
 
-        public IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> sortBy)
+        public IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy)
         {
-            _orderedQuery.ThenBy(sortBy);
+            _orderedQuery.ThenBy(thenBy);
             return this;
         }
 
-        public IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> sortBy)
+        public IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> orderByDescending)
         {
-            if (_orderedQuery == null) _orderedQuery = _queryable.OrderByDescending(sortBy);
-            else _orderedQuery.OrderByDescending(sortBy);
+            if (_orderedQuery == null) _orderedQuery = _queryable.OrderByDescending(orderByDescending);
+            else _orderedQuery.OrderByDescending(orderByDescending);
             return this;
         }
-        public IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> sortBy)
+        public IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> thenByDescending)
         {
-            _orderedQuery.ThenByDescending(sortBy);
+            _orderedQuery.ThenByDescending(thenByDescending);
             return this;
         }
 
