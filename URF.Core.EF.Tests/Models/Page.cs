@@ -4,7 +4,7 @@ namespace URF.Core.EF.Tests.Models
 {
     class Page<TEntity>
     {
-        public Page(IEnumerable<TEntity> value, int count)
+        public Page(int count, IEnumerable<TEntity> value)
         {
             Value = value;
             Count = count;

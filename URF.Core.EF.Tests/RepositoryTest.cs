@@ -315,7 +315,7 @@ namespace URF.Core.EF.Tests
             Assert.Equal(pageSize, enumerable.Length);
             Assert.Collection(enumerable, collectionAssertions);
 
-            var paginated = new Page<Product>(enumerable, count);
+            var paginated = new Page<Product>(count, enumerable);
 
             Assert.Equal(assertionCount, paginated.Count);
             Assert.Collection(paginated.Value, collectionAssertions);
