@@ -19,28 +19,29 @@ namespace URF.Core.EF
 
         public Query(IRepository<TEntity> repository) =>_query = repository.Queryable();
 
-        public virtual IQuery<TEntity> Where(Expression<Func<TEntity, bool>> filter) 
-            => Set(q => q.Where(filter));
+        public virtual IQuery<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
+            => Set(q => q._query = q._query.Where(predicate));
 
-        public virtual IQuery<TEntity> Include(Expression<Func<TEntity, object>> include) 
-            => Set(q => q._query = _query.Include(include));
+        public virtual IQuery<TEntity> Include(Expression<Func<TEntity, object>> navigationProperty) 
+            => Set(q => q._query = q._query.Include(navigationProperty));
 
-        public virtual IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> orderBy)
+        public virtual IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> keySelector)
         {
-            if (_orderedQuery == null) _orderedQuery = _query.OrderBy(orderBy);
-            else _orderedQuery.OrderBy(orderBy);
+            if (_orderedQuery == null) _orderedQuery = _query.OrderBy(keySelector);
+            else _orderedQuery.OrderBy(keySelector);
             return this;
         }
 
         public virtual IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy)
             => Set(q => q._orderedQuery.ThenBy(thenBy));
 
-        public virtual IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> orderByDescending)
+        public virtual IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> keySelector)
         {
-            if (_orderedQuery == null) _orderedQuery = _query.OrderByDescending(orderByDescending);
-            else _orderedQuery.OrderByDescending(orderByDescending);
+            if (_orderedQuery == null) _orderedQuery = _query.OrderByDescending(keySelector);
+            else _orderedQuery.OrderByDescending(keySelector);
             return this;
         }
+
         public virtual IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> thenByDescending)
             =>Set(q => q._orderedQuery.ThenByDescending(thenByDescending));
 
