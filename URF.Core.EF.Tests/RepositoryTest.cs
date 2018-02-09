@@ -262,6 +262,7 @@ namespace URF.Core.EF.Tests
         {
             var repository = new Repository<Product>(_fixture.Context);
 
+            // Arrange
             var expected = new[]
             {
                 new Product {ProductId = 67, ProductName = "Laughing Lumberjack Lager", CategoryId = 1, UnitPrice = 14.00m, Discontinued = false},
@@ -276,15 +277,17 @@ namespace URF.Core.EF.Tests
                 new Product {ProductId = 4, ProductName = "Chef Anton's Cajun Seasoning", CategoryId = 2, UnitPrice = 22.00m, Discontinued = false}
             };
 
-            const int page = 2; // current page
-            const int pageSize = 10; // page size 
+            const int page = 2; 
+            const int pageSize = 10; 
 
-            var count = await repository // total count is needed for paging
+            // Act
+            var count = await repository
                 .Query()
                 .Where(p => p.CategoryId == 1 || p.CategoryId == 2)
                 .CountAsync();
 
-            var products = await repository // paging w/ filter, deep loading, sorting
+            // Act
+            var products = await repository
                 .Query()
                 .Where(p => p.CategoryId == 1 || p.CategoryId == 2)
                 .Include(p => p.Category)
@@ -297,6 +300,7 @@ namespace URF.Core.EF.Tests
 
             const int assertionCount = 24;
 
+            // Assert
             Action<Product>[] collectionAssertions = {
                 p => Assert.Equal(expected[0].ProductId, p.ProductId),
                 p => Assert.Equal(expected[1].ProductId, p.ProductId),
@@ -310,13 +314,16 @@ namespace URF.Core.EF.Tests
                 p => Assert.Equal(expected[9].ProductId, p.ProductId)
             };
 
+            // Assert
             Assert.NotEmpty(enumerable);
             Assert.Equal(assertionCount, count);
             Assert.Equal(pageSize, enumerable.Length);
             Assert.Collection(enumerable, collectionAssertions);
 
+            // Act
             var paginated = new Page<Product>(count, enumerable);
 
+            // Assert
             Assert.Equal(assertionCount, paginated.Count);
             Assert.Collection(paginated.Value, collectionAssertions);
         }
