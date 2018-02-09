@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -15,17 +14,14 @@ namespace URF.Core.EF
     {
         protected DbContext Context { get; }
         protected DbSet<TEntity> Set { get; }
-        private readonly RepositoryFluent<TEntity> _repositoryFluent;
+        private readonly Query<TEntity> _query;
 
         public Repository(DbContext context)
         {
             Context = context;
             Set = context.Set<TEntity>();
-            _repositoryFluent = new RepositoryFluent<TEntity>(this);
+            _query = new Query<TEntity>(this);
         }
-
-        public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
-            => await SelectAsync(null, null, null, null, null, cancellationToken);
 
         public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
             => await Set.FromSql(sql, (object[])parameters).ToListAsync(cancellationToken);
@@ -77,49 +73,11 @@ namespace URF.Core.EF
         public virtual IQueryable<TEntity> Queryable() => Set;
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
-            => Set.FromSql(sql, parameters);
+            => Set.FromSql(sql, parameters);      
 
-        public virtual async Task<IEnumerable<TEntity>> SelectAsync(
-            Expression<Func<TEntity, bool>> filter = null,
-            Expression<Func<TEntity, object>>[] includes = null,
-            ISortExpression<TEntity>[] sortExpressions = null,
-            int? page = null,
-            int? pageSize = null,
-            CancellationToken cancellationToken = default)
-        {
-            IQueryable<TEntity> query = Set;
+        public async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
+                => await Set.ToListAsync(cancellationToken);
 
-            if (filter != null)
-                query = query.Where(filter);
-
-            if (includes != null)
-                foreach (var include in includes)
-                    query.Include(include);
-
-            if (sortExpressions != null)
-            {
-                IOrderedQueryable<TEntity> orderedQuery = null;
-
-                for (var i = 0; i < sortExpressions.Count(); i++)
-                    orderedQuery = sortExpressions[i].SortDirection == ListSortDirection.Ascending 
-                        ? (i == 0 ? query.OrderBy(sortExpressions[i].SortBy) 
-                            : orderedQuery.ThenBy(sortExpressions[i].SortBy)) 
-                        : (i == 0 ? query.OrderByDescending(sortExpressions[i].SortBy) 
-                            : orderedQuery.ThenByDescending(sortExpressions[i].SortBy));
-
-                if (pageSize.HasValue && page.HasValue)
-                    query = orderedQuery.Skip((page.Value - 1) * pageSize.Value);
-            }
-
-            if (pageSize.HasValue)
-                query = query.Take(pageSize.Value);
-
-            return await query.ToListAsync(cancellationToken);
-        }
-
-        public virtual IRepositoryFluent<TEntity> Query()
-        {
-            return _repositoryFluent;
-        }
+        public virtual IQuery<TEntity> Query() =>_query;
     }
 }

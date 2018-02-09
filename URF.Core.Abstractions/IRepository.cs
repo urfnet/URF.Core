@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -6,11 +8,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using URF.Core.Abstractions;
 
+#endregion
+
 namespace Urf.Core.Abstractions
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default);
         Task<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken = default);
         Task<TEntity> FindAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
@@ -26,13 +29,6 @@ namespace Urf.Core.Abstractions
         Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
         IQueryable<TEntity> Queryable();
         IQueryable<TEntity> QueryableSql(string sql, params object[] parameters);
-        Task<IEnumerable<TEntity>> SelectAsync(
-            Expression<Func<TEntity, bool>> filter = null,
-            Expression<Func<TEntity, object>>[] includes = null,
-            ISortExpression<TEntity>[] sortExpressions = null,
-            int? page = null,
-            int? pageSize = null,
-            CancellationToken cancellationToken = default);
-        IRepositoryFluent<TEntity> Query();
+        IQuery<TEntity> Query();
     }
 }
