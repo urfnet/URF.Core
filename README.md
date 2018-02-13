@@ -1,7 +1,7 @@
 # URF.Core
 URF for .NET Standard and EF Core
 
-## Status: URF.Core Alpha is Complete...!!!
+## Status: URF.Core Beta is Complete...!!!
 URF.Core is feature complete and now has full parity with URF.NET (legacy .NET). URF.Core has gone through a complete rewrite with laser focus on Architecture, Design and Implementation as well as implementing top request for vNext.
 
 ## Lightweight, Nano-Footprint+
