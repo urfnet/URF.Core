@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Urf.Core.Abstractions;
 using URF.Core.Abstractions;
 
-namespace URF.Core.EF
+namespace URF.Core.Abstractions.Services
 {
     public abstract class Service<TEntity> : IService<TEntity> where TEntity : class
     {

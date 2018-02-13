@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Urf.Core.Abstractions;
+using URF.Core.Abstractions.Services;
 using URF.Core.EF.Tests.Models;
 
 namespace URF.Core.EF.Tests.Services

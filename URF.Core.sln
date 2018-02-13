@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.EF.Tests", "URF.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.EF.Trackable", "URF.Core.EF.Trackable\URF.Core.EF.Trackable.csproj", "{E48C7073-967B-45C7-A38E-2907B9A6B40D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Abstractions.Services", "URF.Core.Abstractions.Services\URF.Core.Abstractions.Services.csproj", "{DB7FF41B-F2ED-44E7-A40E-199BF583981C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{E48C7073-967B-45C7-A38E-2907B9A6B40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E48C7073-967B-45C7-A38E-2907B9A6B40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E48C7073-967B-45C7-A38E-2907B9A6B40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB7FF41B-F2ED-44E7-A40E-199BF583981C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7FF41B-F2ED-44E7-A40E-199BF583981C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7FF41B-F2ED-44E7-A40E-199BF583981C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7FF41B-F2ED-44E7-A40E-199BF583981C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\URF.Core.Abstractions.Services\URF.Core.Abstractions.Services.csproj" />
     <ProjectReference Include="..\URF.Core.Abstractions.Trackable\URF.Core.Abstractions.Trackable.csproj" />
     <ProjectReference Include="..\URF.Core.Abstractions\URF.Core.Abstractions.csproj" />
     <ProjectReference Include="..\URF.Core.EF.Trackable\URF.Core.EF.Trackable.csproj" />
