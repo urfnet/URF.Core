@@ -13,8 +13,8 @@ namespace URF.Core.EF
     {
         protected readonly IRepository<TEntity> Repository;
 
-        protected Service(IRepository<TEntity> customerRepository)
-            => Repository = customerRepository;
+        protected Service(IRepository<TEntity> repository)
+            => Repository = repository;
 
         public virtual void Attach(TEntity item)
             => Repository.Attach(item);
