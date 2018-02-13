@@ -31,7 +31,7 @@ namespace URF.Core.EF.Tests
             var customer = new Customer
             {
                 CustomerId = "ALFKI",
-                CustomerName = "Maria Anders"
+                ContactName = "Maria Anders"
             };
             var order = new Order
             {

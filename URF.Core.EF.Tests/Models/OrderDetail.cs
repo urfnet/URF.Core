@@ -15,6 +15,8 @@ namespace URF.Core.EF.Tests.Models
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
         public decimal UnitPrice { get; set; }
-        public double Quantity { get; set; }
+        public short Quantity { get; set; }
+        public float Discount { get; set; }
+
     }
 }
