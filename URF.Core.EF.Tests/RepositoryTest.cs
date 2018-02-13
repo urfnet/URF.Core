@@ -1,5 +1,3 @@
-#region
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +10,6 @@ using URF.Core.Abstractions;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using Xunit;
-
-#endregion
 
 namespace URF.Core.EF.Tests
 {

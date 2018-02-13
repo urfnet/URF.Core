@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -9,16 +7,14 @@ using System.Threading.Tasks;
 using Urf.Core.Abstractions;
 using URF.Core.Abstractions;
 
-#endregion
-
-namespace URF.Core.EF
+namespace URF.Core.Abstractions.Services
 {
     public abstract class Service<TEntity> : IService<TEntity> where TEntity : class
     {
         protected readonly IRepository<TEntity> Repository;
 
-        protected Service(IRepository<TEntity> customerRepository)
-            => Repository = customerRepository;
+        protected Service(IRepository<TEntity> repository)
+            => Repository = repository;
 
         public virtual void Attach(TEntity item)
             => Repository.Attach(item);

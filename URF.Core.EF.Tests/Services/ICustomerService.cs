@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using URF.Core.Abstractions.Services;
 using URF.Core.EF.Tests.Models;
 
 namespace URF.Core.EF.Tests.Services
