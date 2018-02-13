@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Urf.Core.Abstractions;
-using URF.Core.Abstractions;
 
 namespace URF.Core.Abstractions.Services
 {
@@ -57,6 +56,9 @@ namespace URF.Core.Abstractions.Services
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters) 
             => Repository.QueryableSql(sql, parameters);
+
+        public Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
+            => Repository.SelectAsync(cancellationToken);
 
         public virtual Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default) 
             => Repository.SelectSqlAsync(sql, parameters, cancellationToken);

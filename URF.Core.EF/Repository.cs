@@ -23,6 +23,9 @@ namespace URF.Core.EF
             _query = new Query<TEntity>(this);
         }
 
+        public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
+                => await Set.ToListAsync(cancellationToken);
+
         public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default) 
             => await Set.FromSql(sql, (object[]) parameters).ToListAsync(cancellationToken);
 
@@ -74,9 +77,6 @@ namespace URF.Core.EF
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
             => Set.FromSql(sql, parameters);      
-
-        public async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
-                => await Set.ToListAsync(cancellationToken);
 
         public virtual IQuery<TEntity> Query() =>_query;
     }
