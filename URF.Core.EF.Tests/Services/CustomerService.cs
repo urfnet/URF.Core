@@ -7,7 +7,7 @@ using URF.Core.EF.Tests.Models;
 
 namespace URF.Core.EF.Tests.Services
 {
-    public class CustomerService: Service<Customer>
+    public class CustomerService : Service<Customer>, ICustomerService
     {
         private readonly IRepository<Order> _ordeRepository;
 
