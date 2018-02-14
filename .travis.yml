@@ -3,4 +3,4 @@ mono: none
 dotnet: 2.1.4
 script:
   - dotnet build
-  - dotnet test URF.Core.EF.Tests
+  - dotnet test URF.Core.EF.Tests --no-build --no-restore

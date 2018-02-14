@@ -27,7 +27,7 @@ namespace URF.Core.EF.Tests
                 new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
             };
             _fixture = fixture;
-            _fixture.Initialize(false, () =>
+            _fixture.Initialize(true, () =>
             {
                 _fixture.Context.SeedDataSql(categories, _products);
             });
