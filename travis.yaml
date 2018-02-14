@@ -1,0 +1,8 @@
+language: csharp
+solution: URF.Core.sln
+install:
+  - nuget restore URF.Core.sln
+  - nuget install xunit.runners -Version 2.0.0 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release URF.Core.sln
+  - mono ./testrunner/xunit.runners.2.0.0/tools/xunit.console.clr4.exe ./URF.Core.EF.Tests/bin/Release/URF.Core.EF.Tests.dll
