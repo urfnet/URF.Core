@@ -2,8 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Urf.Core.Abstractions;
-using URF.Core.Abstractions.Services;
+using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Tests.Models;
 using URF.Core.Services;
 
@@ -11,11 +10,11 @@ namespace URF.Core.EF.Tests.Services
 {
     public class CustomerService : Service<Customer>, ICustomerService
     {
-        private readonly IRepository<Order> _ordeRepository;
+        private readonly ITrackableRepository<Order> _ordeRepository;
 
         public CustomerService(
-            IRepository<Customer> customerRepository,
-            IRepository<Order> ordeRepository) : base(customerRepository)
+            ITrackableRepository<Customer> customerRepository,
+            ITrackableRepository<Order> ordeRepository) : base(customerRepository)
         {
             _ordeRepository = ordeRepository;
         }

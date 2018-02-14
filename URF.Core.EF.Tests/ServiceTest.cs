@@ -1,17 +1,12 @@
 #region
 
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using URF.Core.Abstractions;
+using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using URF.Core.EF.Tests.Services;
+using URF.Core.EF.Trackable;
 using Xunit;
 
 #endregion
@@ -53,8 +48,8 @@ namespace URF.Core.EF.Tests
         public async Task CustomerOrderTotalByYear_Should_Return_Order_Total()
         {
             // Arrange
-            var customerRepository = new Repository<Customer>(_fixture.Context);
-            var orderRepository = new Repository<Order>(_fixture.Context);
+            ITrackableRepository<Customer> customerRepository = new TrackableRepository<Customer>(_fixture.Context);
+            ITrackableRepository<Order> orderRepository = new TrackableRepository<Order>(_fixture.Context);
             var customerService = new CustomerService(customerRepository, orderRepository);
 
             // Act
@@ -68,8 +63,8 @@ namespace URF.Core.EF.Tests
         public async Task CustomersByCompany_Should_Return_Customer()
         {
             // Arrange
-            var customerRepository = new Repository<Customer>(_fixture.Context);
-            var orderRepository = new Repository<Order>(_fixture.Context);
+            ITrackableRepository<Customer> customerRepository = new TrackableRepository<Customer>(_fixture.Context);
+            ITrackableRepository<Order> orderRepository = new TrackableRepository<Order>(_fixture.Context);
             var customerService = new CustomerService(customerRepository, orderRepository);
             const string company = "Alfreds Futterkiste";
 
