@@ -12,6 +12,7 @@
     <Description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</Description>
     <PackageTags>repository unitofwork patterns</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/urfnet/URF.Core</RepositoryUrl>
   </PropertyGroup>
 
 </Project>

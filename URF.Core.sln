@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.EF.Trackable", "UR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Abstractions.Services", "URF.Core.Abstractions.Services\URF.Core.Abstractions.Services.csproj", "{DB7FF41B-F2ED-44E7-A40E-199BF583981C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URF.Core.Services", "URF.Core.Services\URF.Core.Services.csproj", "{ED37FEA5-EBFF-4835-AF4A-9A00E1E1D442}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Services", "URF.Core.Services\URF.Core.Services.csproj", "{ED37FEA5-EBFF-4835-AF4A-9A00E1E1D442}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

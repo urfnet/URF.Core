@@ -14,8 +14,8 @@ namespace URF.Core.EF.Tests
     [Collection(nameof(NorthwindDbContext))]
     public class TrackableRepositoryTest
     {
-        private readonly TrackableUnitOfWork _unitOfWork;
         private readonly NorthwindDbContextFixture _fixture;
+        private UnitOfWork _unitOfWork;
 
         public TrackableRepositoryTest(NorthwindDbContextFixture fixture)
         {
@@ -57,7 +57,8 @@ namespace URF.Core.EF.Tests
                 _fixture.Context.Orders.Add(order);
                 _fixture.Context.SaveChanges();
             });
-            _unitOfWork = new TrackableUnitOfWork(_fixture.Context);
+
+            _unitOfWork = new UnitOfWork(_fixture.Context);
         }
 
         [Fact]
