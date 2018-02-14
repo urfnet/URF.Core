@@ -1,5 +1,7 @@
 # URF.Core
-URF for .NET Standard and EF Core
+[![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core)
+
+Unit of Work and Repository Framework for .NET Standard and EF Core
 
 ## Status: URF.Core Beta is Complete...!!!
 URF.Core is feature complete and now has full parity with URF.NET (legacy .NET). URF.Core has gone through a complete rewrite with laser focus on Architecture, Design and Implementation as well as implementing top request for vNext.
@@ -7,7 +9,7 @@ URF.Core is feature complete and now has full parity with URF.NET (legacy .NET).
 ## Lightweight, Nano-Footprint+
 Staying faithful to (legacy) [URF.NET](https://github.com/urfnet/URF.NET) of having a small footprint. URF.Core [URF.Core](https://github.com/urfnet/URF.Core) (**7 total classes**) vs. [URF.NET](https://github.com/urfnet/URF.NET) (**12 total classes**).
 
-## 1000% Extensible
+## 100% Extensible
  We've made every implementation virtual therefore overridable for whatever teams/projects/developer use-cases as well as edge-cases.
 
 ```csharp
@@ -22,4 +24,4 @@ As as always, this is a religous debate between teams and the within the communi
 ## Performance
 URF.Core has been completly re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, team's will automatically get the best thread management and utilize and max out on asyncronous perf improvements.
 
-![alpha-unit-and-integration-tests](https://github.com/urfnet/URF.Core/blob/master/assets/2018-02-09_0-16-15.png?raw=true)
+![alpha-unit-and-integration-tests](https://user-images.githubusercontent.com/2836367/36233036-c501125a-11a9-11e8-972f-8c673534760a.png)
