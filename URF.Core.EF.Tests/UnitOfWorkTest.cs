@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Urf.Core.Abstractions;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using Xunit;
@@ -15,33 +16,6 @@ namespace URF.Core.EF.Tests
         {
             _fixture = fixture;
             _fixture.Initialize();
-        }
-
-        [Fact]
-        public void Repository_Getter_Should_Create_Repository()
-        {
-            // Arrange
-            var unitOfWork = new UnitOfWork(_fixture.Context);
-
-            // Act
-            var repository = unitOfWork.Repository<Product>();
-
-            // Assert
-            Assert.NotNull(repository);
-        }
-
-        [Fact]
-        public void Repository_Getter_Should_Return_Created_Repository()
-        {
-            // Arrange
-            var unitOfWork = new UnitOfWork(_fixture.Context);
-            var repository = unitOfWork.Repository<Product>();
-
-            // Act
-            var repository1 = unitOfWork.Repository<Product>();
-
-            // Assert
-            Assert.Same(repository, repository1);
         }
 
         [Fact]

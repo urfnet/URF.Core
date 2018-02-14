@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TrackableEntities.Common.Core;
+using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using URF.Core.EF.Trackable;
@@ -63,7 +64,7 @@ namespace URF.Core.EF.Tests
         public void Insert_Should_Set_Entity_State_to_Added()
         {
             // Arrange
-            var productsRepo = _unitOfWork.TrackableRepository<Product>();
+            ITrackableRepository<Product> productsRepo = new TrackableRepository<Product>(_fixture.Context);
             var product = new Product {ProductId = 4, ProductName = "Product 4", UnitPrice = 40, CategoryId = 1};
 
             // Act
@@ -77,7 +78,7 @@ namespace URF.Core.EF.Tests
         public void Update_Should_Set_Entity_State_to_Modified()
         {
             // Arrange
-            var productsRepo = _unitOfWork.TrackableRepository<Product>();
+            ITrackableRepository<Product> productsRepo = new TrackableRepository<Product>(_fixture.Context);
             var product = new Product { ProductId = 4, ProductName = "Product 4", UnitPrice = 40, CategoryId = 1 };
 
             // Act
@@ -91,7 +92,7 @@ namespace URF.Core.EF.Tests
         public void Delete_Should_Set_Entity_State_to_Deleted()
         {
             // Arrange
-            var productsRepo = _unitOfWork.TrackableRepository<Product>();
+            ITrackableRepository<Product> productsRepo = new TrackableRepository<Product>(_fixture.Context);
             var product = new Product { ProductId = 4, ProductName = "Product 4", UnitPrice = 40, CategoryId = 1 };
 
             // Act
@@ -105,7 +106,7 @@ namespace URF.Core.EF.Tests
         public async Task DeleteAsync_Should_Set_Entity_State_to_Deleted()
         {
             // Arrange
-            var productsRepo = _unitOfWork.TrackableRepository<Product>();
+            ITrackableRepository<Product> productsRepo = new TrackableRepository<Product>(_fixture.Context);
             var product = await productsRepo.FindAsync(1);
 
             // Act
@@ -119,7 +120,7 @@ namespace URF.Core.EF.Tests
         public async Task ApplyChanges_Should_Set_Graph_States()
         {
             // Arrange
-            var ordersRepo = _unitOfWork.TrackableRepository<Order>();
+            ITrackableRepository<Order> ordersRepo = new TrackableRepository<Order>(_fixture.Context);
             var order = await ordersRepo.FindAsync(1);
             ordersRepo.DetachEntities(order);
 

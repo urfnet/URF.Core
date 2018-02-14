@@ -21,9 +21,9 @@ namespace URF.Core.EF.Tests
     [Collection(nameof(NorthwindDbContext))]
     public class ServiceTest
     {
-        private List<Product> _products;
-        private List<Category> _categories;
         private readonly List<Order> _orders;
+        private readonly List<Product> _products;
+        private readonly List<Category> _categories;
         private readonly List<Customer> _customers;
         private readonly List<OrderDetail> _ordersDetails;
 
