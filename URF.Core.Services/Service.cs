@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Urf.Core.Abstractions;
+using URF.Core.Abstractions;
+using URF.Core.Abstractions.Services;
 
-namespace URF.Core.Abstractions.Services
+namespace URF.Core.Services
 {
     public abstract class Service<TEntity> : IService<TEntity> where TEntity : class
     {

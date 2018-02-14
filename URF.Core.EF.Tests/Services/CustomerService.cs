@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Urf.Core.Abstractions;
 using URF.Core.Abstractions.Services;
 using URF.Core.EF.Tests.Models;
+using URF.Core.Services;
 
 namespace URF.Core.EF.Tests.Services
 {

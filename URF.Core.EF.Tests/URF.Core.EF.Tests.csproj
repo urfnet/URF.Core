@@ -23,6 +23,7 @@
     <ProjectReference Include="..\URF.Core.Abstractions\URF.Core.Abstractions.csproj" />
     <ProjectReference Include="..\URF.Core.EF.Trackable\URF.Core.EF.Trackable.csproj" />
     <ProjectReference Include="..\URF.Core.EF\URF.Core.EF.csproj" />
+    <ProjectReference Include="..\URF.Core.Services\URF.Core.Services.csproj" />
   </ItemGroup>
 
 </Project>
