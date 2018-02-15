@@ -11,25 +11,17 @@ namespace URF.Core.EF.Tests
     [Collection(nameof(NorthwindDbContext))]
     public class RepositorySqlTest
     {
-        private readonly List<Product> _products;
+        private readonly List<Category> _categories = Factory.Categories().Where(c => c.CategoryId == 1).ToList();
+        private readonly List<Product> _products = Factory.Products().Where(p => p.CategoryId == 1).ToList();
         private readonly NorthwindDbContextFixture _fixture;
 
         public RepositorySqlTest(NorthwindDbContextFixture fixture)
         {
-            var categories = new List<Category>
-            {
-                new Category { CategoryId = 1, CategoryName = "Beverages"},
-            };
-            _products = new List<Product>
-            {
-                new Product { ProductId = 1, ProductName = "Product 1", UnitPrice = 10, CategoryId = 1 },
-                new Product { ProductId = 2, ProductName = "Product 2", UnitPrice = 20, CategoryId = 1 },
-                new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
-            };
             _fixture = fixture;
             _fixture.Initialize(true, () =>
             {
-                _fixture.Context.SeedDataSql(categories, _products);
+                _fixture.Context.Categories.AddRange(_categories);
+                _fixture.Context.Products.AddRange(_products);
             });
         }
 
@@ -38,7 +30,7 @@ namespace URF.Core.EF.Tests
         {
             // Arrange
             var parameters = new object[] {1, "Product"};
-            var sql = "SELECT * FROM Products WHERE CategoryId = {0} AND ProductName LIKE {1} + '%'";
+            var sql = "SELECT * FROM Products WHERE CategoryId = {0}";
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act
@@ -64,7 +56,7 @@ namespace URF.Core.EF.Tests
             var query = repository.QueryableSql("SELECT * FROM Products");
             var products = await query
                 .Include(p => p.Category)
-                .Where(p => p.UnitPrice > 15)
+                //.Where(p => p.UnitPrice > 15)
                 .Select(p => new MyProduct
                 {
                     Id = p.ProductId,
