@@ -13,7 +13,6 @@ Staying faithful to (legacy) [URF.NET](https://github.com/urfnet/URF.NET) of hav
 #### 100% Extensible
  We've made every implementation virtual therefore overridable for whatever teams/projects/developer use-cases as well as edge-cases.
 
-
 #### IQuerable vs. IEnumerable
 As as always, this is a religous debate between teams and the within the community. As with (legacy) URF.NET, we gave teams the option to opt into IQueryable or IEnumerable, and even both depending on your teams Architecture, Design & Implementation and style. As URF.NET and for teams that feel Repository Patterns that expose `IQueryable` as a leaky  abstraction, simple use URF's `IQuery` API, which will give you all the Fluet features of IQueryable, however will return pure Entity or IEnumerable<TEntity> vs. using IQueryable, again URF.Core & URF.NET both support, so teams have the total freedom of decieding which 3 paths/options that makes the most sense for their team/project.
 
