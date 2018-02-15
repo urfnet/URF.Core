@@ -3,6 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    <Authors>Long Le, Tony Sneed</Authors>
+    <Company>Long Le, Tony Sneed</Company>
+    <Description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</Description>
+    <PackageLicenseUrl>https://github.com/urfnet/URF.Core/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/urfnet/URF.Core</PackageProjectUrl>
+    <PackageIconUrl>https://user-images.githubusercontent.com/2836367/36162252-7ec8dd8a-10ab-11e8-936c-11bbb77ef574.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/urfnet/URF.Core</RepositoryUrl>
+    <PackageTags>repository unitofwork service patterns</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@
     <PackageIconUrl>https://user-images.githubusercontent.com/2836367/36162252-7ec8dd8a-10ab-11e8-936c-11bbb77ef574.png</PackageIconUrl>
     <Title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): Abstractions</Title>
     <Description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</Description>
-    <PackageTags>repository unitofwork patterns</PackageTags>
+    <PackageTags>repository unitofwork service patterns</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/urfnet/URF.Core</RepositoryUrl>
   </PropertyGroup>
