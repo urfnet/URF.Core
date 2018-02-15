@@ -13,16 +13,16 @@ namespace URF.Core.EF.Tests.Contexts
             {
                 context.Database.OpenConnection();
                 context.Categories.AddRange(categories);
-                context.Database.ExecuteSqlCommand("DELETE dbo.Categories");
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Categories ON");
+                context.Database.ExecuteSqlCommand("DELETE Categories");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Categories ON");
                 context.SaveChanges();
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Categories OFF");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Categories OFF");
 
                 context.Products.AddRange(products);
-                context.Database.ExecuteSqlCommand("DELETE dbo.Products");
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Products ON");
+                context.Database.ExecuteSqlCommand("DELETE Products");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Products ON");
                 context.SaveChanges();
-                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Products OFF");
+                context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT Products OFF");
             }
             finally
             {
