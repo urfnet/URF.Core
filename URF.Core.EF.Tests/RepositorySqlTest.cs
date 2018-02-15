@@ -22,6 +22,7 @@ namespace URF.Core.EF.Tests
             {
                 _fixture.Context.Categories.AddRange(_categories);
                 _fixture.Context.Products.AddRange(_products);
+                _fixture.Context.SaveChangesAsync();
             });
         }
 
@@ -29,15 +30,15 @@ namespace URF.Core.EF.Tests
         public async Task SelectSqlAsync_Should_Return_Entities()
         {
             // Arrange
-            var parameters = new object[] {1, "Product"};
-            var sql = "SELECT * FROM Products WHERE CategoryId = {0}";
+            var parameters = new object[] { 1 };
+            var sql = "SELECT * FROM Products WHERE CategoryId = {0};";
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act
             var products = await repository.SelectSqlAsync(sql, parameters);
 
             // Assert
-            Assert.Collection(products,
+            Assert.Collection(products.Take(3),
                 p => Assert.Equal(_products[0].ProductId, p.ProductId),
                 p => Assert.Equal(_products[1].ProductId, p.ProductId),
                 p => Assert.Equal(_products[2].ProductId, p.ProductId));
@@ -48,15 +49,16 @@ namespace URF.Core.EF.Tests
         {
             // Arrange
             var comparer = new MyProductComparer();
-            var expected1 = new MyProduct { Id = 2, Name = "Product 2", Price = 20, Category = "Beverages" };
-            var expected2 = new MyProduct { Id = 3, Name = "Product 3", Price = 30, Category = "Beverages" };
+            var expected1 = new MyProduct { Id = 1, Name = "Chai", Price = 18m, Category = "Beverages" };
+            var expected2 = new MyProduct { Id = 2, Name = "Chang", Price = 19m, Category = "Beverages" };
+            var expected3 = new MyProduct { Id = 24, Name = "Guaraná Fantástica", Price = 4.5m, Category = "Beverages" };
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act
             var query = repository.QueryableSql("SELECT * FROM Products");
             var products = await query
                 .Include(p => p.Category)
-                //.Where(p => p.UnitPrice > 15)
+                .Where(p => p.UnitPrice > 15)
                 .Select(p => new MyProduct
                 {
                     Id = p.ProductId,
@@ -67,9 +69,10 @@ namespace URF.Core.EF.Tests
                 .ToListAsync();
 
             // Assert
-            Assert.Collection(products,
+            Assert.Collection(products.Take(3),
                 p => Assert.Equal(expected1, p, comparer),
-                p => Assert.Equal(expected2, p, comparer));
+                p => Assert.Equal(expected2, p, comparer),
+                p => Assert.Equal(expected3, p, comparer));
         }
     }
 }
