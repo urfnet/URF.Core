@@ -129,4 +129,4 @@ public class ProductsController : ODataController
 #### Performance
 URF.Core has been completly re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, team's will automatically get the best thread management and utilize and max out on asyncronous perf improvements.
 
-<img src='https://user-images.githubusercontent.com/2836367/36233036-c501125a-11a9-11e8-972f-8c673534760a.png' width="50%" />
+<img src='https://user-images.githubusercontent.com/2836367/36233036-c501125a-11a9-11e8-972f-8c673534760a.png' width="75%" />
