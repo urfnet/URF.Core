@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>URF.Core.All</id>
+    <version>1.0.0-beta</version>
+    <title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): Metapackage</title>
+    <authors>Long Le, Tony Sneed</authors>
+    <owners>Long Le, Tony Sneed</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/urfnet/URF.Core/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/urfnet/URF.Core</projectUrl>
+    <iconUrl>https://user-images.githubusercontent.com/2836367/36162252-7ec8dd8a-10ab-11e8-936c-11bbb77ef574.png</iconUrl>
+    <description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</description>
+    <tags>repository unitofwork service patterns urf</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="URF.Core.EF.Trackable" version="1.0.0-beta" exclude="Build,Analyzers" />
+        <dependency id="URF.Core.Services" version="1.0.0-beta" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
