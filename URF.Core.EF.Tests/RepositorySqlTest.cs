@@ -51,7 +51,7 @@ namespace URF.Core.EF.Tests
             var comparer = new MyProductComparer();
             var expected1 = new MyProduct { Id = 1, Name = "Chai", Price = 18m, Category = "Beverages" };
             var expected2 = new MyProduct { Id = 2, Name = "Chang", Price = 19m, Category = "Beverages" };
-            var expected3 = new MyProduct { Id = 24, Name = "Guaraná Fantástica", Price = 4.5m, Category = "Beverages" };
+            var expected3 = new MyProduct { Id = 24, Name = "Guarana Fantastica", Price = 4.5m, Category = "Beverages" };
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act

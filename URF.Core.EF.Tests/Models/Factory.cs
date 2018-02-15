@@ -3027,7 +3027,7 @@ namespace URF.Core.EF.Tests.Models
                 new Product {ProductId = 21, ProductName = "Sir Rodney's Scones", CategoryId = 3, UnitPrice = 10.00m, Discontinued = false},
                 new Product {ProductId = 22, ProductName = "Gustaf's Knäckebröd", CategoryId = 5, UnitPrice = 21.00m, Discontinued = false},
                 new Product {ProductId = 23, ProductName = "Tunnbröd", CategoryId = 5, UnitPrice = 9.00m, Discontinued = false},
-                new Product {ProductId = 24, ProductName = "Guaraná Fantástica", CategoryId = 1, UnitPrice = 4.50m, Discontinued = true},
+                new Product {ProductId = 24, ProductName = "Guarana Fantastica", CategoryId = 1, UnitPrice = 4.50m, Discontinued = true},
                 new Product {ProductId = 25, ProductName = "NuNuCa Nuß-Nougat-Creme", CategoryId = 3, UnitPrice = 14.00m, Discontinued = false},
                 new Product {ProductId = 26, ProductName = "Gumbär Gummibärchen", CategoryId = 3, UnitPrice = 31.23m, Discontinued = false},
                 new Product {ProductId = 27, ProductName = "Schoggi Schokolade", CategoryId = 3, UnitPrice = 43.90m, Discontinued = false},
