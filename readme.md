@@ -133,10 +133,16 @@ URF.Core has been completly re-written, and everything is now completely `task`,
 <table>
   <tr>
     <td>    
-      <img src="https://user-images.githubusercontent.com/4691404/36338938-0a7b6f7e-1380-11e8-94d1-6c308989aa6c.png" width="50%" border="0">
+      <img src="https://user-images.githubusercontent.com/4691404/36338938-0a7b6f7e-1380-11e8-94d1-6c308989aa6c.png" width="500px">
     </td>
     <td>
-      <img src="https://user-images.githubusercontent.com/4691404/36340352-cce7fe0e-13a0-11e8-9bbb-3cf85d6d8104.png" width="100%">
+      <img src="https://user-images.githubusercontent.com/4691404/36340352-cce7fe0e-13a0-11e8-9bbb-3cf85d6d8104.png" width="450px">
+    </td>
+    <td>
+      <img src="https://user-images.githubusercontent.com/4691404/36340407-da64cd0e-13a1-11e8-8dd9-5bb634ca0511.png" width="375px">    
+    </td>
+    <td>
+      <img src="https://user-images.githubusercontent.com/4691404/36340442-a686c8a6-13a2-11e8-93c9-2c7db4392c52.png" width="375px">    
     </td>
   </tr>
 </table>
