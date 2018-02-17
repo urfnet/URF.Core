@@ -1,5 +1,5 @@
 # URF.Core #
-**_<sup>Unit-of-Work & Repository Framework | Official [URF](https://github.com/urfnet) & [Trackable](https://github.com/TrackableEntities) Team</sup>_**
+* **_<sup>Unit-of-Work & Repository Framework | Official [URF](https://github.com/urfnet) & [Trackable](https://github.com/TrackableEntities) Team</sup>_**
 
 [![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core)
 ##### Docs: [comming soon](https://goo.gl/6zh9zp) | Subscribe URF Updates: [@lelong37](http://twitter.com/lelong37) | NuGet: [goo.gl/WEn7Jm](https://goo.gl/WEn7Jm) | Samples: [https://goo.gl/MgC4tG](https://goo.gl/MgC4tG) ####
@@ -129,4 +129,14 @@ public class ProductsController : ODataController
 #### Performance
 URF.Core has been completly re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, team's will automatically get the best thread management and utilize and max out on asyncronous perf improvements.
 
-<img src='https://user-images.githubusercontent.com/2836367/36233036-c501125a-11a9-11e8-972f-8c673534760a.png' width="65%" />
+#### URF Powered & Sponsered by:
+<table>
+  <tr>
+    <td>    
+      <img src="https://user-images.githubusercontent.com/4691404/36338938-0a7b6f7e-1380-11e8-94d1-6c308989aa6c.png" width="50%" border="0">
+    </td>
+    <td>
+      <img src="https://user-images.githubusercontent.com/4691404/36340352-cce7fe0e-13a0-11e8-9bbb-3cf85d6d8104.png" width="100%">
+    </td>
+  </tr>
+</table>
