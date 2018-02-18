@@ -18,5 +18,9 @@ namespace URF.Core.Abstractions
         IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy);
         IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> thenByDescending);
         Task<int> CountAsync(CancellationToken cancellationToken = default);
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+        Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+        Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default);
+        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
     }
 }

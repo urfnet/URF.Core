@@ -35,7 +35,7 @@ namespace URF.Core.EF.Tests
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act
-            var products = await repository.SelectSqlAsync(sql, parameters);
+            var products = await repository.Query().SelectSqlAsync(sql, parameters);
 
             // Assert
             Assert.Collection(products.Take(3),

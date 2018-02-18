@@ -10,8 +10,6 @@ namespace Urf.Core.Abstractions
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default);
-        Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default);
         Task<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken = default);
         Task<TEntity> FindAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
         Task<bool> ExistsAsync(object[] keyValues, CancellationToken cancellationToken = default);

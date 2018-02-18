@@ -312,7 +312,7 @@ namespace URF.Core.EF.Tests
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act
-            var products = await repository.SelectAsync();
+            var products = await repository.Query().SelectAsync();
             var enumerable = products as Product[] ?? products.ToArray();
 
             // Assert

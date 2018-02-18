@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#region
+
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -8,12 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using Urf.Core.Abstractions;
 using URF.Core.Abstractions;
 
+#endregion
+
 namespace URF.Core.EF
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected DbContext Context { get; }
-        protected DbSet<TEntity> Set { get; }
         private readonly IQuery<TEntity> _query;
 
         public Repository(DbContext context)
@@ -23,17 +24,14 @@ namespace URF.Core.EF
             _query = new Query<TEntity>(this);
         }
 
-        public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
-                => await Set.ToListAsync(cancellationToken);
-
-        public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default) 
-            => await Set.FromSql(sql, (object[]) parameters).ToListAsync(cancellationToken);
+        protected DbContext Context { get; }
+        protected DbSet<TEntity> Set { get; }
 
         public virtual async Task<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken = default)
-            => await Set.FindAsync((object[])keyValues, cancellationToken);
+            => await Set.FindAsync(keyValues, cancellationToken);
 
         public virtual async Task<TEntity> FindAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
-            => await FindAsync(new object[] { keyValue }, cancellationToken);
+            => await FindAsync(new object[] {keyValue}, cancellationToken);
 
         public virtual async Task<bool> ExistsAsync(object[] keyValues, CancellationToken cancellationToken = default)
         {
@@ -71,13 +69,13 @@ namespace URF.Core.EF
         }
 
         public virtual async Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
-            => await DeleteAsync(new object[] { keyValue }, cancellationToken);
+            => await DeleteAsync(new object[] {keyValue}, cancellationToken);
 
         public virtual IQueryable<TEntity> Queryable() => Set;
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
-            => Set.FromSql(sql, parameters);      
+            => Set.FromSql(sql, parameters);
 
-        public virtual IQuery<TEntity> Query() =>_query;
+        public virtual IQuery<TEntity> Query() => _query;
     }
 }
