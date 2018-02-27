@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TrackableEntities.Common.Core;
@@ -15,19 +16,19 @@ namespace URF.Core.EF.Trackable
         }
 
         public override void Insert(TEntity item)
-            => item.TrackingState = TrackingState.Added;
+            => TrackStateAndApplyChanges(x => x.TrackingState = TrackingState.Added, item);
 
         public override void Update(TEntity item)
-            => item.TrackingState = TrackingState.Modified;
+            => TrackStateAndApplyChanges(x => x.TrackingState = TrackingState.Modified, item);
 
         public override void Delete(TEntity item)
-            => item.TrackingState = TrackingState.Deleted;
+            => TrackStateAndApplyChanges(x => x.TrackingState = TrackingState.Deleted, item);
 
         public override async Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default)
         {
             var item = await FindAsync(keyValues, cancellationToken);
             if (item == null) return false;
-                item.TrackingState = TrackingState.Deleted;
+                TrackStateAndApplyChanges(x => x.TrackingState = TrackingState.Deleted, item);
             return true;
         }
 
@@ -42,5 +43,11 @@ namespace URF.Core.EF.Trackable
 
         public virtual async Task LoadRelatedEntities(params TEntity[] entities)
             => await Context.LoadRelatedEntitiesAsync(entities);
+
+        private void TrackStateAndApplyChanges(Action<TEntity> setParameter, TEntity item)
+        {
+            setParameter(item);
+            ApplyChanges(item);
+        }
     }
 }
