@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Urf.Core.Abstractions;
 using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
@@ -74,6 +75,28 @@ namespace URF.Core.EF.Tests
             // Assert
             Assert.Collection(customers, customer
                 => Assert.Equal("ALFKI", customer.CustomerId));
+        }
+
+
+        [Fact]
+        public async Task Insert_Customer_Should_Save_Changes()
+        {
+            IUnitOfWork unitOfWork = new UnitOfWork(_fixture.Context);
+            ITrackableRepository<Customer> customerRepository = new TrackableRepository<Customer>(_fixture.Context);
+            ITrackableRepository<Order> orderRepository = new TrackableRepository<Order>(_fixture.Context);
+            var customerService = new CustomerService(customerRepository, orderRepository);
+
+            var cust = new Customer
+            {
+                CustomerId = "COMP1",
+                CompanyName = "Company 1"
+            };
+
+            customerService.Insert(cust);
+            Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, cust.TrackingState);
+
+            var savedChanges = await unitOfWork.SaveChangesAsync();
+            Assert.Equal<int>(1, savedChanges);
         }
     }
 }
