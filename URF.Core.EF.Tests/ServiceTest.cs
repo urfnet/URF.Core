@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TrackableEntities.Common.Core;
 using Urf.Core.Abstractions;
 using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Tests.Contexts;
@@ -87,20 +86,11 @@ namespace URF.Core.EF.Tests
             var customerService = new CustomerService(customerRepository, orderRepository);
 
             var customer = new Customer
-            {
-                CustomerId = "COMP1",
-                CompanyName = "Company 1"
-            };
-
-            customerService.Insert(customer);
-
-            Assert.Equal(TrackingState.Added, customer.TrackingState);
+            customerService.Insert(cust);
+            Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, cust.TrackingState);
 
             var savedChanges = await unitOfWork.SaveChangesAsync();
             Assert.Equal<int>(1, savedChanges);
-
-            var newCustomer = await customerService.FindAsync("COMP1");
-            Assert.Equal(newCustomer.CustomerId, customer.CustomerId);
         }
     }
 }
