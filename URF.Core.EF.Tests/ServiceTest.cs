@@ -77,21 +77,15 @@ namespace URF.Core.EF.Tests
                 => Assert.Equal("ALFKI", customer.CustomerId));
         }
 
-
         [Fact]
-        public async Task Insert_Customer_Should_Save_Changes()
+        public async Task InsertCustomer_Should_add_record_to_the_database()
         {
             IUnitOfWork unitOfWork = new UnitOfWork(_fixture.Context);
             ITrackableRepository<Customer> customerRepository = new TrackableRepository<Customer>(_fixture.Context);
             ITrackableRepository<Order> orderRepository = new TrackableRepository<Order>(_fixture.Context);
             var customerService = new CustomerService(customerRepository, orderRepository);
 
-            var cust = new Customer
-            {
-                CustomerId = "COMP1",
-                CompanyName = "Company 1"
-            };
-
+            var customer = new Customer
             customerService.Insert(cust);
             Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, cust.TrackingState);
 
