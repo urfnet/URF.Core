@@ -78,19 +78,38 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
-        public async Task InsertCustomer_Should_add_record_to_the_database()
+        public async Task Service_Insert_Should_Insert_Into_Database()
         {
+            // Arrange
             IUnitOfWork unitOfWork = new UnitOfWork(_fixture.Context);
             ITrackableRepository<Customer> customerRepository = new TrackableRepository<Customer>(_fixture.Context);
             ITrackableRepository<Order> orderRepository = new TrackableRepository<Order>(_fixture.Context);
             var customerService = new CustomerService(customerRepository, orderRepository);
 
-            var customer = new Customer();
+            const string customerId = "COMP1";
+            const string companyName = "Company 1";
+
+            var customer = new Customer
+            {
+                CustomerId = customerId,
+                CompanyName = companyName
+            };
+
+            // Act
             customerService.Insert(customer);
+            // Assert
             Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, customer.TrackingState);
 
+            // Act
             var savedChanges = await unitOfWork.SaveChangesAsync();
+
+            // Act
+            var newCustomer = await customerRepository.FindAsync(customerId);
+
+            // Assert
             Assert.Equal<int>(1, savedChanges);
+            Assert.Equal(newCustomer.CustomerId, customerId);
+            Assert.Equal(newCustomer.CompanyName, companyName);
         }
     }
 }
