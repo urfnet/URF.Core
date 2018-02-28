@@ -97,17 +97,20 @@ namespace URF.Core.EF.Tests
 
             // Act
             customerService.Insert(customer);
+
             // Assert
             Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, customer.TrackingState);
 
             // Act
             var savedChanges = await unitOfWork.SaveChangesAsync();
 
+            // Assert
+            Assert.Equal(1, savedChanges);
+
             // Act
             var newCustomer = await customerRepository.FindAsync(customerId);
 
             // Assert
-            Assert.Equal(1, savedChanges);
             Assert.Equal(newCustomer.CustomerId, customerId);
             Assert.Equal(newCustomer.CompanyName, companyName);
         }
