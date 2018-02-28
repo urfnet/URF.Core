@@ -85,9 +85,9 @@ namespace URF.Core.EF.Tests
             ITrackableRepository<Order> orderRepository = new TrackableRepository<Order>(_fixture.Context);
             var customerService = new CustomerService(customerRepository, orderRepository);
 
-            var customer = new Customer
-            customerService.Insert(cust);
-            Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, cust.TrackingState);
+            var customer = new Customer();
+            customerService.Insert(customer);
+            Assert.Equal(TrackableEntities.Common.Core.TrackingState.Added, customer.TrackingState);
 
             var savedChanges = await unitOfWork.SaveChangesAsync();
             Assert.Equal<int>(1, savedChanges);
