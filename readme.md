@@ -31,9 +31,11 @@ public class ProductsController : ODataController
         _unitOfWork = unitOfWork;
     }
 
+    // e.g. GET odata/Products?$skip=2&$top=10
     [EnableQuery]
     public IQueryable<Products> Get() => _productService.Queryable();
 
+    // e.g.  GET odata/Products(37)
     public async Task<IActionResult> Get([FromODataUri] int key)
     {
         if (!ModelState.IsValid)
@@ -47,7 +49,8 @@ public class ProductsController : ODataController
         return Ok(product);
     }
 
-    public async Task<IActionResult> Put(int key, [FromBody] Products products)
+    // e.g. PUT odata/Products(37)
+    public async Task<IActionResult> Put([FromODataUri] int key, [FromBody] Products products)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -55,7 +58,7 @@ public class ProductsController : ODataController
         if (key != products.ProductId)
             return BadRequest();
 
-        products.TrackingState = TrackingState.Modified;
+        _productService.Update(products);
 
         try
         {
@@ -71,6 +74,7 @@ public class ProductsController : ODataController
         return NoContent();
     }
 
+    // e.g. PUT odata/Products
     public async Task<IActionResult> Post([FromBody] Products products)
     {
         if (!ModelState.IsValid)
@@ -82,6 +86,7 @@ public class ProductsController : ODataController
         return Created(products);
     }
 
+    // e.g. PATCH, MERGE odata/Products(37)
     [AcceptVerbs("PATCH", "MERGE")]
     public async Task<IActionResult> Patch([FromODataUri] int key, [FromBody] Delta<Products> product)
     {
@@ -108,6 +113,7 @@ public class ProductsController : ODataController
         return Updated(entity);
     }
 
+    // e.g. DELETE odata/Products(37)
     public async Task<IActionResult> Delete([FromODataUri] int key)
     {
         if (!ModelState.IsValid)
