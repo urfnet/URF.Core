@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>1.0.0-beta2</Version>
+    <Version>1.0.0-beta3</Version>
     <Authors>Long Le, Tony Sneed</Authors>
     <PackageLicenseUrl>https://github.com/urfnet/URF.Core/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/urfnet/URF.Core</PackageProjectUrl>
