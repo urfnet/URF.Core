@@ -152,3 +152,5 @@ URF.Core has been completly re-written, and everything is now completely `task`,
     </td>
   </tr>
 </table>
+
+&copy; 2017 [URF.NET](https://github.com/urfnet) All rights reserved.
