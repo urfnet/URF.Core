@@ -23,13 +23,13 @@ namespace URF.Core.EF.Trackable
         public override void Update(TEntity item)
         {
             item.TrackingState = TrackingState.Modified;
-            base.Insert(item);
+            base.Update(item);
         }
 
         public override void Delete(TEntity item)
         {
             item.TrackingState = TrackingState.Deleted;
-            base.Insert(item);
+            base.Delete(item);
         }
 
         public override async Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default)
