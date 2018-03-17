@@ -15,7 +15,7 @@ namespace URF.Core.EF.Tests
     public class TrackableRepositoryTest
     {
         private readonly NorthwindDbContextFixture _fixture;
-        private UnitOfWork _unitOfWork;
+        private readonly UnitOfWork _unitOfWork;
 
         public TrackableRepositoryTest(NorthwindDbContextFixture fixture)
         {       
