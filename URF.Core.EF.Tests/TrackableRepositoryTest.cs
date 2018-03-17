@@ -19,42 +19,43 @@ namespace URF.Core.EF.Tests
 
         public TrackableRepositoryTest(NorthwindDbContextFixture fixture)
         {
-            var categories = new List<Category>
-            {
-                new Category { CategoryId = 1, CategoryName = "Beverages"},
-            };
-            var products = new List<Product>
-            {
-                new Product { ProductId = 1, ProductName = "Product 1", UnitPrice = 10, CategoryId = 1 },
-                new Product { ProductId = 2, ProductName = "Product 2", UnitPrice = 20, CategoryId = 1 },
-                new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
-            };
-            var customer = new Customer
-            {
-                CustomerId = "ALFKI",
-                ContactName = "Maria Anders"
-            };
-            var order = new Order
-            {
-                OrderId = 1,
-                OrderDate = DateTime.Today,
-                CustomerId = "ALFKI",
-                Customer = customer,
-                OrderDetails = new List<OrderDetail>
-                {
-                    new OrderDetail { OrderDetailId = 1, OrderId = 1, ProductId = 1, Product = products[0], UnitPrice = 10, Quantity = 100},
-                    new OrderDetail { OrderDetailId = 2, OrderId = 1, ProductId = 2, Product = products[1], UnitPrice = 20, Quantity = 200},
-                    new OrderDetail { OrderDetailId = 3, OrderId = 1, ProductId = 3, Product = products[2], UnitPrice = 30, Quantity = 300},
-                }
-            };
+            //var categories = new List<Category>
+            //{
+            //    new Category { CategoryId = 1, CategoryName = "Beverages"},
+            //};
+            //var products = new List<Product>
+            //{
+            //    new Product { ProductId = 1, ProductName = "Product 1", UnitPrice = 10, CategoryId = 1 },
+            //    new Product { ProductId = 2, ProductName = "Product 2", UnitPrice = 20, CategoryId = 1 },
+            //    new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
+            //};
+            //var customer = new Customer
+            //{
+            //    CustomerId = "ALFKI",
+            //    ContactName = "Maria Anders"
+            //};
+            //var order = new Order
+            //{
+            //    OrderId = 1,
+            //    OrderDate = DateTime.Today,
+            //    CustomerId = "ALFKI",
+            //    Customer = customer,
+            //    OrderDetails = new List<OrderDetail>
+            //    {
+            //        new OrderDetail { OrderDetailId = 1, OrderId = 1, ProductId = 1, Product = products[0], UnitPrice = 10, Quantity = 100},
+            //        new OrderDetail { OrderDetailId = 2, OrderId = 1, ProductId = 2, Product = products[1], UnitPrice = 20, Quantity = 200},
+            //        new OrderDetail { OrderDetailId = 3, OrderId = 1, ProductId = 3, Product = products[2], UnitPrice = 30, Quantity = 300},
+            //    }
+            //};
 
             _fixture = fixture;
             _fixture.Initialize(true, () =>
             {
-                _fixture.Context.Categories.AddRange(categories);
-                _fixture.Context.Products.AddRange(products);
-                _fixture.Context.Customers.Add(customer);
-                _fixture.Context.Orders.Add(order);
+                _fixture.Context.Categories.AddRange(Factory.Categories());
+                _fixture.Context.Products.AddRange(Factory.Products());
+                _fixture.Context.Customers.AddRange(Factory.Customers());
+                _fixture.Context.Orders.AddRange(Factory.Orders());
+                _fixture.Context.OrderDetails.AddRange(Factory.OrderDetails());
                 _fixture.Context.SaveChanges();
             });
 
@@ -66,7 +67,7 @@ namespace URF.Core.EF.Tests
         {
             // Arrange
             ITrackableRepository<Product> productsRepo = new TrackableRepository<Product>(_fixture.Context);
-            var product = new Product {ProductId = 4, ProductName = "Product 4", UnitPrice = 40, CategoryId = 1};
+            var product = new Product {ProductId = 80, ProductName = "Product 80", UnitPrice = 40, CategoryId = 1};
 
             // Act
             productsRepo.Insert(product);
@@ -80,7 +81,7 @@ namespace URF.Core.EF.Tests
         {
             // Arrange
             ITrackableRepository<Product> productsRepo = new TrackableRepository<Product>(_fixture.Context);
-            var product = new Product { ProductId = 4, ProductName = "Product 4", UnitPrice = 40, CategoryId = 1 };
+            var product = new Product { ProductId = 81, ProductName = "Product 81", UnitPrice = 40, CategoryId = 1 };
 
             // Act
             productsRepo.Update(product);
@@ -122,22 +123,33 @@ namespace URF.Core.EF.Tests
         {
             // Arrange
             ITrackableRepository<Order> ordersRepo = new TrackableRepository<Order>(_fixture.Context);
-            var order = await ordersRepo.FindAsync(1);
+            var order = await ordersRepo.FindAsync(10248);
             ordersRepo.DetachEntities(order);
 
-            order.OrderDetails[0].TrackingState = TrackingState.Unchanged;
+            // updating object in complex object graph
+            order.OrderDetails[0].UnitPrice = 17; 
+            order.OrderDetails[0].TrackingState = TrackingState.Modified;
+
+            // updating object in complex object graph
+            order.OrderDetails[1].Quantity = 2; 
             order.OrderDetails[1].TrackingState = TrackingState.Modified;
+
+            // deleting object in complex object graph
             order.OrderDetails[2].TrackingState = TrackingState.Deleted;
+
+            // adding object in complex object graph
             var addedDetail = new OrderDetail
             {
-                OrderDetailId = 4,
+                //OrderDetailId = 4,
                 OrderId = 1,
                 ProductId = 3,
                 Product = order.OrderDetails[2].Product,
                 UnitPrice = 40,
-                Quantity = 400,
-                TrackingState = TrackingState.Added
+                Quantity = 400,            
+                TrackingState = TrackingState.Added 
             };
+
+            // Act
             order.OrderDetails.Add(addedDetail);
 
             // Act
@@ -145,10 +157,13 @@ namespace URF.Core.EF.Tests
 
             // Assert
             Assert.Equal(EntityState.Unchanged, _fixture.Context.Entry(order).State);
-            Assert.Equal(EntityState.Unchanged, _fixture.Context.Entry(order.OrderDetails[0]).State);
+            Assert.Equal(EntityState.Modified, _fixture.Context.Entry(order.OrderDetails[0]).State);
             Assert.Equal(EntityState.Modified, _fixture.Context.Entry(order.OrderDetails[1]).State);
             Assert.Equal(EntityState.Deleted, _fixture.Context.Entry(order.OrderDetails[2]).State);
             Assert.Equal(EntityState.Added, _fixture.Context.Entry(order.OrderDetails[3]).State);
+
+            // Save changes to object graph with different TrackingStates throughout the object graph
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }
