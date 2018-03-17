@@ -18,36 +18,7 @@ namespace URF.Core.EF.Tests
         private UnitOfWork _unitOfWork;
 
         public TrackableRepositoryTest(NorthwindDbContextFixture fixture)
-        {
-            //var categories = new List<Category>
-            //{
-            //    new Category { CategoryId = 1, CategoryName = "Beverages"},
-            //};
-            //var products = new List<Product>
-            //{
-            //    new Product { ProductId = 1, ProductName = "Product 1", UnitPrice = 10, CategoryId = 1 },
-            //    new Product { ProductId = 2, ProductName = "Product 2", UnitPrice = 20, CategoryId = 1 },
-            //    new Product { ProductId = 3, ProductName = "Product 3", UnitPrice = 30, CategoryId = 1 },
-            //};
-            //var customer = new Customer
-            //{
-            //    CustomerId = "ALFKI",
-            //    ContactName = "Maria Anders"
-            //};
-            //var order = new Order
-            //{
-            //    OrderId = 1,
-            //    OrderDate = DateTime.Today,
-            //    CustomerId = "ALFKI",
-            //    Customer = customer,
-            //    OrderDetails = new List<OrderDetail>
-            //    {
-            //        new OrderDetail { OrderDetailId = 1, OrderId = 1, ProductId = 1, Product = products[0], UnitPrice = 10, Quantity = 100},
-            //        new OrderDetail { OrderDetailId = 2, OrderId = 1, ProductId = 2, Product = products[1], UnitPrice = 20, Quantity = 200},
-            //        new OrderDetail { OrderDetailId = 3, OrderId = 1, ProductId = 3, Product = products[2], UnitPrice = 30, Quantity = 300},
-            //    }
-            //};
-
+        {       
             _fixture = fixture;
             _fixture.Initialize(true, () =>
             {
