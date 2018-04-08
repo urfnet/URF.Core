@@ -1,4 +1,4 @@
-# URF.Core [![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core) #
+# URF.Core [![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core) [![NuGet Badge](https://buildstats.info/nuget/URF.Core.EF.Trackable?includePreReleases=true)](https://www.nuget.org/packages?q=urf.core) #
 
 **_<sup>Unit-of-Work & Repository Framework | Official [URF](https://github.com/urfnet) & [Trackable](https://github.com/TrackableEntities) Team</sup>_**
 
