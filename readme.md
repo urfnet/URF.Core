@@ -6,7 +6,7 @@
 
 ##### Docs: [URF.Core.Sample](https://goo.gl/MgC4tG) | Subscribe URF Updates: [@lelong37](http://twitter.com/lelong37) | NuGet: [goo.gl/WEn7Jm](https://goo.gl/WEn7Jm) #####
 
-### Sample & Live Demo w/˝ Source Code: [URF.Core.Sample](https://goo.gl/MgC4tG) ###
+### Sample & Live Demo w/ Source Code: [URF.Core.Sample](https://goo.gl/MgC4tG) ###
 
 #### URF.Core RC2 is Complete
 URF.Core is feature complete and now has full parity with URF.NET (legacy .NET). URF.Core has gone through a complete rewrite with laser focus on Architecture, Design and Implementation as well as implementing top request for vNext, you can take a look at our [URF.Core.Sample](https://github.com/urfnet/URF.Core.Sample) w/ [ASP.NET Core Web API](https://github.com/aspnet/Home), [OData](https://github.com/OData/WebApi), with full CRUD samples with [Angular](https://angular.io/) and [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/).
