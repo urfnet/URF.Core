@@ -1,14 +1,14 @@
-# URF.Core &nbsp;&nbsp; [![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core) [![NuGet Badge](https://buildstats.info/nuget/URF.Core.EF.Trackable?includePreReleases=true)](https://www.nuget.org/packages?q=urf.core) #
+# URF.Core &nbsp;&nbsp; <span style="text-align: right">[![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core) [![NuGet Badge](https://buildstats.info/nuget/URF.Core.EF.Trackable?includePreReleases=true)](https://www.nuget.org/packages?q=urf.core)</span> #
 
 **_<sup>Unit-of-Work & Repository Framework | Official [URF](https://github.com/urfnet) & [Trackable](https://github.com/TrackableEntities) Team</sup>_**
 
 [![Build history](https://buildstats.info/travisci/chart/urfnet/URF.Core)](https://travis-ci.org/urfnet/URF.Core/builds)
 
-##### Docs: [comming soon](https://goo.gl/6zh9zp) | Subscribe URF Updates: [@lelong37](http://twitter.com/lelong37) | NuGet: [goo.gl/WEn7Jm](https://goo.gl/WEn7Jm) #####
+##### Docs: [URF.Core.Sample](https://goo.gl/MgC4tG) | Subscribe URF Updates: [@lelong37](http://twitter.com/lelong37) | NuGet: [goo.gl/WEn7Jm](https://goo.gl/WEn7Jm) #####
 
-**Sample & Live Demo with Source Code: [URF.Core.Sample](https://goo.gl/MgC4tG)**
+### Sample & Live Demo w/˝ Source Code: [URF.Core.Sample](https://goo.gl/MgC4tG) ###
 
-#### URF.Core Beta is Complete...!
+#### URF.Core RC2 is Complete
 URF.Core is feature complete and now has full parity with URF.NET (legacy .NET). URF.Core has gone through a complete rewrite with laser focus on Architecture, Design and Implementation as well as implementing top request for vNext, you can take a look at our [URF.Core.Sample](https://github.com/urfnet/URF.Core.Sample) w/ [ASP.NET Core Web API](https://github.com/aspnet/Home), [OData](https://github.com/OData/WebApi), with full CRUD samples with [Angular](https://angular.io/) and [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/).
 
 #### Lightweight, Nano-Footprint
