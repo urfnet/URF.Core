@@ -1,6 +1,8 @@
-# URF.Core [![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core) [![NuGet Badge](https://buildstats.info/nuget/URF.Core.EF.Trackable?includePreReleases=true)](https://www.nuget.org/packages?q=urf.core) #
+# URF.Core &nbsp;&nbsp; [![Build Status](https://travis-ci.org/urfnet/URF.Core.svg?branch=master)](https://travis-ci.org/urfnet/URF.Core) [![NuGet Badge](https://buildstats.info/nuget/URF.Core.EF.Trackable?includePreReleases=true)](https://www.nuget.org/packages?q=urf.core) #
 
 **_<sup>Unit-of-Work & Repository Framework | Official [URF](https://github.com/urfnet) & [Trackable](https://github.com/TrackableEntities) Team</sup>_**
+
+[![Build history](https://buildstats.info/travisci/chart/urfnet/URF.Core)](https://travis-ci.org/urfnet/URF.Core/builds)
 
 ##### Docs: [comming soon](https://goo.gl/6zh9zp) | Subscribe URF Updates: [@lelong37](http://twitter.com/lelong37) | NuGet: [goo.gl/WEn7Jm](https://goo.gl/WEn7Jm) #####
 
