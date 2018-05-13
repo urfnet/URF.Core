@@ -22,8 +22,11 @@ namespace URF.Core.EF
         public virtual IQuery<TEntity> Where(Expression<Func<TEntity, bool>> predicate)
             => Set(q => q._query = q._query.Where(predicate));
 
-        public virtual IQuery<TEntity> Include(Expression<Func<TEntity, object>> navigationProperty) 
+        public virtual IQuery<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigationProperty) 
             => Set(q => q._query = q._query.Include(navigationProperty));
+
+        public virtual IQuery<TEntity> Include(string navigationPropertyPath)
+            => Set(q => q._query = q._query.Include(navigationPropertyPath));
 
         public virtual IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> keySelector)
         {

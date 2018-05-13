@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using URF.Core.Abstractions;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using Xunit;
@@ -201,7 +197,7 @@ namespace URF.Core.EF.Tests
 
             // Assert
             Assert.Same(_categories[0], product.Category);
-        }       
+        }
 
         [Fact]
         public async Task Fluent_Api_Should_Support_Paging()
