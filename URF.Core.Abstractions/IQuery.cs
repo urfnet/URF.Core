@@ -9,7 +9,8 @@ namespace URF.Core.Abstractions
     public interface IQuery<TEntity> where TEntity : class
     {
         IQuery<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
-        IQuery<TEntity> Include(Expression<Func<TEntity, object>> navigationProperty);
+        IQuery<TEntity> Include<TProperty>(Expression<Func<TEntity, TProperty>> navigationProperty);
+        IQuery<TEntity> Include(string navigationPropertyPath);
         IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> keySelector);
         IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> keySelector);
         Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default);
