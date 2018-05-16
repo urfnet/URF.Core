@@ -135,10 +135,18 @@ namespace URF.Core.EF.Tests
             Assert.Collection(orders,
                 o => Assert.Collection(o.OrderDetails,
                     od => Assert.NotNull(od.Product),
+                    od => Assert.NotNull(od.Product),
+                    od => Assert.NotNull(od.Product)),
+                o => Assert.Collection(o.OrderDetails,
+                    od => Assert.NotNull(od.Product),
+                    od => Assert.NotNull(od.Product)));
+            Assert.Collection(orders,
+                o => Assert.Collection(o.OrderDetails,
+                    od => Assert.NotNull(od.Product.Category),
                     od => Assert.NotNull(od.Product.Category),
                     od => Assert.NotNull(od.Product.Category)),
                 o => Assert.Collection(o.OrderDetails,
-                    od => Assert.NotNull(od.Product),
+                    od => Assert.NotNull(od.Product.Category),
                     od => Assert.NotNull(od.Product.Category)));
         }
     }
