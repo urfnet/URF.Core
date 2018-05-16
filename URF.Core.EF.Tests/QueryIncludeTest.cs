@@ -11,6 +11,7 @@ namespace URF.Core.EF.Tests
     [Collection(nameof(NorthwindDbContext))]
     public class QueryIncludeTest
     {
+        private const string SkipReason = "Only run locally with MS SQL LocalDb";
         private readonly NorthwindDbContextFixture _fixture;
 
         public QueryIncludeTest(NorthwindDbContextFixture fixture)
@@ -87,7 +88,7 @@ namespace URF.Core.EF.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = SkipReason)]
         public async Task Query_Fluent_Api_Should_Not_Load_Included_Entities()
         {
             // Arrange
@@ -109,7 +110,7 @@ namespace URF.Core.EF.Tests
                 o => Assert.Empty(o.OrderDetails));
         }
 
-        [Fact]
+        [Fact(Skip = SkipReason)]
         public async Task Query_Fluent_Api_Should_Load_Included_Entities()
         {
             // Arrange
