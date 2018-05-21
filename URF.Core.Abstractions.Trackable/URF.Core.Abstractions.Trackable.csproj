@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TrackableEntities.Common.Core" Version="1.0.0-rc" />
+    <PackageReference Include="TrackableEntities.Common.Core" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
