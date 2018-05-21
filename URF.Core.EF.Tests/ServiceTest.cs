@@ -1,16 +1,12 @@
-#region
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Urf.Core.Abstractions;
+using URF.Core.Abstractions;
 using URF.Core.Abstractions.Trackable;
 using URF.Core.EF.Tests.Contexts;
 using URF.Core.EF.Tests.Models;
 using URF.Core.EF.Tests.Services;
 using URF.Core.EF.Trackable;
 using Xunit;
-
-#endregion
 
 namespace URF.Core.EF.Tests
 {
