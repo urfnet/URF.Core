@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using TrackableEntities.Common.Core;
-using Urf.Core.Abstractions;
 
 namespace URF.Core.Abstractions.Trackable
 {

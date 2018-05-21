@@ -1,15 +1,10 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using URF.Core.Abstractions;
 
-#endregion
-
-namespace Urf.Core.Abstractions
+namespace URF.Core.Abstractions
 {
     public interface IRepository<TEntity> where TEntity : class
     {
