@@ -18,7 +18,7 @@ Staying faithful to (legacy) [URF.NET](https://github.com/urfnet/URF.NET) of hav
  We've made every implementation virtual therefore overridable for whatever teams/projects/developer use-cases as well as edge-cases.
 
 #### IQuerable vs. IEnumerable
-As as always, this is a religous debate between teams and the within the community. As with (legacy) URF.NET, we gave teams the option to opt into IQueryable or IEnumerable, and even both depending on your teams Architecture, Design & Implementation and style. As URF.NET and for teams that feel Repository Patterns that expose `IQueryable` as a leaky  abstraction, simple use URF's `IQuery` API, which will give you all the Fluet features of IQueryable, however will return pure Entity or IEnumerable<TEntity> vs. using IQueryable, again URF.Core & URF.NET both support, so teams have the total freedom of decieding which 3 paths/options that makes the most sense for their team/project.
+As as always, this is a religious debate between teams and the within the community. As with (legacy) URF.NET, we gave teams the option to opt into IQueryable or IEnumerable, and even both depending on your teams Architecture, Design & Implementation and style. As URF.NET and for teams that feel Repository Patterns that expose `IQueryable` as a leaky  abstraction, simple use URF's `IQuery` API, which will give you all the Fluent features of IQueryable, however will return pure Entity or IEnumerable<TEntity> vs. using IQueryable, again URF.Core & URF.NET both support, so teams have the total freedom to choose which of the 3 paths/options makes most sense for their team/project.
 
 #### URF.Core sample and usage in ASP.NET Core Web API & OData
 ```csharp
@@ -135,7 +135,7 @@ public class ProductsController : ODataController
 }
 ```
 #### Performance
-URF.Core has been completly re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, team's will automatically get the best thread management and utilize and max out on asyncronous perf improvements.
+URF.Core has been completely re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, teams will automatically get the best thread management out on asynchronous perf improvements.
 
 #### URF Powered & Sponsered by:
 <table border="0" style="border:0px;none">
