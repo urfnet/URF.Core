@@ -316,6 +316,25 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
+        public async Task Queries_should_be_fired_and_forgotten()
+        {
+            // Arrange
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            var products = await repository.Query().Where(p => p.ProductId == 1).SelectAsync();
+
+            // Assert
+            Assert.NotNull(products);
+
+            // Act
+            var product = await repository.Query().SingleOrDefaultAsync(s => s.ProductId == 2);
+
+            // Assert
+            Assert.NotNull(product);
+        }
+
+        [Fact]
         public void Update_Should_Set_Entity_State_Modified()
         {
             // Arrange
