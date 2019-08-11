@@ -66,19 +66,19 @@ namespace URF.Core.EF
             return await _query.ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.FirstOrDefaultAsync(predicate, cancellationToken);
 
-        public virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.SingleOrDefaultAsync(predicate, cancellationToken);
 
-        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.AnyAsync(predicate, cancellationToken);
 
-        public virtual async Task<bool> AnyAsync(CancellationToken cancellationToken)
+        public virtual async Task<bool> AnyAsync(CancellationToken cancellationToken = default)
             => await _query.AnyAsync(cancellationToken);
 
-        public virtual async Task<bool> AllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<bool> AllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.AllAsync(predicate, cancellationToken);
 
         public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
