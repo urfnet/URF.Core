@@ -51,14 +51,14 @@ namespace URF.Core.EF.Tests
             var comparer = new MyProductComparer();
             var expected1 = new MyProduct { Id = 1, Name = "Chai", Price = 18m, Category = "Beverages" };
             var expected2 = new MyProduct { Id = 2, Name = "Chang", Price = 19m, Category = "Beverages" };
-            var expected3 = new MyProduct { Id = 24, Name = "Guarana Fantastica", Price = 4.5m, Category = "Beverages" };
+            var expected3 = new MyProduct { Id = 35, Name = "Steeleye Stout", Price = 18m, Category = "Beverages" };
             var repository = new Repository<Product>(_fixture.Context);
 
             // Act
             var query = repository.QueryableSql("SELECT * FROM Products");
             var products = await query
                 .Include(p => p.Category)
-                .Where(p => p.UnitPrice > 15)
+                .Where(p => (new int[] { 1, 2, 35 }).Contains(p.ProductId))
                 .Select(p => new MyProduct
                 {
                     Id = p.ProductId,
