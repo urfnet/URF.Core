@@ -10,13 +10,11 @@ namespace URF.Core.EF
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly IQuery<TEntity> _query;
 
         public Repository(DbContext context)
         {
             Context = context;
             Set = context.Set<TEntity>();
-            _query = new Query<TEntity>(this);
         }
 
         protected DbContext Context { get; }
@@ -26,7 +24,7 @@ namespace URF.Core.EF
             => await Set.FindAsync(keyValues, cancellationToken);
 
         public virtual async Task<TEntity> FindAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
-            => await FindAsync(new object[] {keyValue}, cancellationToken);
+            => await FindAsync(new object[] { keyValue }, cancellationToken);
 
         public virtual async Task<bool> ExistsAsync(object[] keyValues, CancellationToken cancellationToken = default)
         {
@@ -35,7 +33,7 @@ namespace URF.Core.EF
         }
 
         public virtual async Task<bool> ExistsAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
-            => await ExistsAsync(new object[] {keyValue}, cancellationToken);
+            => await ExistsAsync(new object[] { keyValue }, cancellationToken);
 
         public virtual async Task LoadPropertyAsync(TEntity item, Expression<Func<TEntity, object>> property, CancellationToken cancellationToken = default)
             => await Context.Entry(item).Reference(property).LoadAsync(cancellationToken);
@@ -64,13 +62,13 @@ namespace URF.Core.EF
         }
 
         public virtual async Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
-            => await DeleteAsync(new object[] {keyValue}, cancellationToken);
+            => await DeleteAsync(new object[] { keyValue }, cancellationToken);
 
         public virtual IQueryable<TEntity> Queryable() => Set;
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
             => Set.FromSql(sql, parameters);
 
-        public virtual IQuery<TEntity> Query() => _query;
+        public virtual IQuery<TEntity> Query() => new Query<TEntity>(this);
     }
 }
