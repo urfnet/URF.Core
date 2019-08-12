@@ -19,6 +19,6 @@ namespace URF.Core.EF
             => await Context.SaveChangesAsync(cancellationToken);
 
         public virtual async Task<int> ExecuteSqlCommandAsync(string sql, IEnumerable<object> parameters, CancellationToken cancellationToken = default)
-            => await Context.Database.ExecuteSqlCommandAsync(sql, parameters, cancellationToken);
+            => await Context.Database.ExecuteSqlRawAsync(sql, parameters, cancellationToken);
     }
 }

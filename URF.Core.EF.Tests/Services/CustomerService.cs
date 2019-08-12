@@ -29,13 +29,15 @@ namespace URF.Core.EF.Tests.Services
 
         public async Task<decimal> CustomerOrderTotalByYear(string customerId, int year)
         {
-            return await Repository
+            var customers = await Repository
                 .Queryable()
                 .Where(c => c.CustomerId == customerId)
+                .ToListAsync();
+            return customers
                 .SelectMany(c => c.Orders.Where(o => o.OrderDate != null && o.OrderDate.Value.Year == year))
                 .SelectMany(c => c.OrderDetails)
                 .Select(c => c.Quantity * c.UnitPrice)
-                .SumAsync();
+                .Sum();
         }
 
         public async Task<IEnumerable<CustomerOrder>> GetCustomerOrder(string country)

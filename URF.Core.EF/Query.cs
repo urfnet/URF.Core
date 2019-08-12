@@ -82,7 +82,7 @@ namespace URF.Core.EF
             => await _query.AllAsync(predicate, cancellationToken);
 
         public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
-            => await _query.FromSql(sql, parameters).ToListAsync(cancellationToken);
+            => await (_query as DbSet<TEntity>)?.FromSqlRaw(sql, parameters).ToListAsync(cancellationToken);
 
         private IQuery<TEntity> Set(Action<Query<TEntity>> setParameter)
         {
