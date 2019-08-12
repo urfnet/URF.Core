@@ -67,7 +67,7 @@ namespace URF.Core.EF
         public virtual IQueryable<TEntity> Queryable() => Set;
 
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
-            => Set.FromSql(sql, parameters);
+            => Set.FromSqlRaw(sql, parameters);
 
         public virtual IQuery<TEntity> Query() => new Query<TEntity>(this);
     }

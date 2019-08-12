@@ -77,10 +77,10 @@ namespace URF.Core.EF.Tests
                 var insertOn = $"SET IDENTITY_INSERT dbo.{tableName} ON";
                 var insertOff = $"SET IDENTITY_INSERT dbo.{tableName} OFF";
                 if (typeof(TEntity) != typeof(Customer) && typeof(TEntity) != typeof(OrderDetail))
-                    context.Database.ExecuteSqlCommand(insertOn);
+                    context.Database.ExecuteSqlRaw(insertOn);
                 context.SaveChanges();
                 if (typeof(TEntity) != typeof(Customer) && typeof(TEntity) != typeof(OrderDetail))
-                    context.Database.ExecuteSqlCommand(insertOff);
+                    context.Database.ExecuteSqlRaw(insertOff);
             }
             finally
             {

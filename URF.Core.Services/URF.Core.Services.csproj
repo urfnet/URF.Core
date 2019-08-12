@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>2.2.0</Version>
+    <Version>3.0.0-preview7</Version>
     <Authors>Long Le, Tony Sneed</Authors>
-    <PackageLicenseUrl>https://github.com/urfnet/URF.Core/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/urfnet/URF.Core</PackageProjectUrl>
     <PackageIconUrl>https://user-images.githubusercontent.com/2836367/36162252-7ec8dd8a-10ab-11e8-936c-11bbb77ef574.png</PackageIconUrl>
     <Title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): Services</Title>
