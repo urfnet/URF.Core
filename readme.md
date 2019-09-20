@@ -153,7 +153,9 @@ URF.Core has been completely re-written, and everything is now completely `task`
       <img src="https://user-images.githubusercontent.com/4691404/36340442-a686c8a6-13a2-11e8-93c9-2c7db4392c52.png" width="375px">    
     </td>
    <td>
+     <a href="https://www.gitkraken.com/">
      <img src="https://www.gitkraken.com/downloads/brand-assets/gitkraken-logo-light-sq.png" />
+    </a>
    </td>
   </tr>
 </table>
