@@ -270,7 +270,7 @@ namespace URF.Core.EF.Tests
             Assert.Collection(paginated.Value, collectionAssertions);
         }
 
-        [Fact(Skip = "Throws InvalidOperationException: Operation is not valid due to the current state of the object.")]
+        [Fact]
         public async Task Queryable_Should_Allow_Composition()
         {
             // Arrange
@@ -285,7 +285,7 @@ namespace URF.Core.EF.Tests
             var products = await query
                 .Take(2)
                 .Include(p => p.Category)
-                .Where(p => p.UnitPrice > 15)
+                .Where(p => p.UnitPrice.CompareTo(15.00m) > 0 )
                 .Select(p => new MyProduct
                 {
                     Id = p.ProductId,
