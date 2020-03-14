@@ -8,15 +8,22 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/urfnet/URF.Core</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
-    <Title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): Abstractions</Title>
+    <Title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): MongoDb</Title>
     <Description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</Description>
-    <PackageTags>repository unitofwork service patterns</PackageTags>
+    <PackageTags>repository unitofwork patterns</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <RepositoryUrl>https://github.com/urfnet/URF.Core</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="icon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\URF.Core.Abstractions\URF.Core.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
