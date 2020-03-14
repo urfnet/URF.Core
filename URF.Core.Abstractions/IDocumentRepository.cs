@@ -21,9 +21,9 @@ namespace URF.Core.Abstractions
 
         Task<List<TEntity>> InsertManyAsync(IEnumerable<TEntity> items, CancellationToken cancellationToken = default);
 
-        Task DeleteOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
+        Task<int> DeleteOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
 
-        Task DeleteManyAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
+        Task<int> DeleteManyAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
 
         IQueryable<TEntity> Queryable();
     }
