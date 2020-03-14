@@ -11,6 +11,12 @@
 #### URF.Core RTM is Complete!
 URF.Core is feature complete and now has full parity with URF.NET (legacy .NET). URF.Core has gone through a complete rewrite with laser focus on Architecture, Design and Implementation as well as implementing top request for vNext, you can take a look at our [URF.Core.Sample](https://github.com/urfnet/URF.Core.Sample) w/ [ASP.NET Core Web API](https://github.com/aspnet/Home), [OData](https://github.com/OData/WebApi), with full CRUD samples with [Angular](https://angular.io/) and [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/).
 
+#### Supported Added for MongoDb
+As of version 3.1.1, support has been added for NoSQL Document databases with an implementation for MongoDb.
+
+#### Samples for EF Core 3.x and MongoDb
+Samples have been provided for [EF Core 3.x](https://github.com/urfnet/URF.Core.Sample.v3) and [MongoDb](https://github.com/urfnet/URF.Core.Sample.NoSql).
+
 #### Lightweight, Nano-Footprint
 Staying faithful to (legacy) [URF.NET](https://github.com/urfnet/URF.NET) of having a small footprint. URF.Core [URF.Core](https://github.com/urfnet/URF.Core) (**7 total classes**) vs. [URF.NET](https://github.com/urfnet/URF.NET) (**12 total classes**).
 
