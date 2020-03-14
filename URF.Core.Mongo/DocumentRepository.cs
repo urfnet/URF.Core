@@ -43,11 +43,17 @@ namespace URF.Core.Mongo
             return item;
         }
 
-        public virtual async Task DeleteManyAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default)
-            => await Collection.DeleteManyAsync(filter, cancellationToken);
+        public virtual async Task<int> DeleteManyAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default)
+        {
+            var result = await Collection.DeleteManyAsync(filter, cancellationToken);
+            return (int)result.DeletedCount;
+        }
 
-        public virtual async Task DeleteOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default)
-            => await Collection.DeleteOneAsync(filter, cancellationToken);
+        public virtual async Task<int> DeleteOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default)
+        {
+            var result = await Collection.DeleteOneAsync(filter, cancellationToken);
+            return (int)result.DeletedCount;
+        }
 
         public virtual IQueryable<TEntity> Queryable()
             => Collection.AsQueryable();
