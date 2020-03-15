@@ -181,6 +181,216 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
+        public async Task Queryable_AnyAsync_Should_Return_True()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.BookName == _books[0].BookName)
+                .AnyAsync();
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task Queryable_CountAsync_Should_Return_Count()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .CountAsync();
+
+            // Assert
+            Assert.Equal(2, result);
+        }
+
+        [Fact]
+        public async Task Queryable_LongCountAsync_Should_Return_Count()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .LongCountAsync();
+
+            // Assert
+            Assert.Equal(2, result);
+        }
+
+        [Fact]
+        public async Task Queryable_FirstAsync_Should_Return_Entity()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .FirstAsync();
+
+            // Assert
+            Assert.Equal(_books[0].Id, result.Id);
+        }
+
+        [Fact]
+        public async Task Queryable_FirstOrDefaultAsync_Should_Return_Entity()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .FirstOrDefaultAsync();
+
+            // Assert
+            Assert.Equal(_books[0].Id, result.Id);
+        }
+
+        [Fact]
+        public async Task Queryable_FirstOrDefaultAsync_Should_Return_Null()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == "Foo")
+                .FirstOrDefaultAsync();
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task Queryable_MaxAsync_With_Select_Should_Return_Max()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .Select(b => b.Price)
+                .MaxAsync();
+
+            // Assert
+            Assert.Equal(_books[0].Price, result);
+        }
+
+        [Fact]
+        public async Task Queryable_MaxAsync_With_Expression_Should_Return_Max()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .MaxAsync(b => b.Price);
+
+            // Assert
+            Assert.Equal(_books[0].Price, result);
+        }
+
+        [Fact]
+        public async Task Queryable_MinAsync_With_Select_Should_Return_Min()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .Select(b => b.Price)
+                .MinAsync();
+
+            // Assert
+            Assert.Equal(_books[1].Price, result);
+        }
+
+        [Fact]
+        public async Task Queryable_MinAsync_With_Expression_Should_Return_Min()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Category == _books[0].Category)
+                .MinAsync(b => b.Price);
+
+            // Assert
+            Assert.Equal(_books[1].Price, result);
+        }
+
+        [Fact]
+        public async Task Queryable_SingleAsync_Should_Return_Entity()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Id == _books[0].Id)
+                .FirstAsync();
+
+            // Assert
+            Assert.Equal(_books[0].Id, result.Id);
+        }
+
+        [Fact]
+        public async Task Queryable_SingleOrDefaultAsync_Should_Return_Entity()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.Id == _books[0].Id)
+                .SingleOrDefaultAsync();
+
+            // Assert
+            Assert.Equal(_books[0].Id, result.Id);
+        }
+
+        [Fact]
+        public async Task Queryable_SingleOrDefaultAsync_Should_Return_Null()
+        {
+            // Arrange
+            var repository = new DocumentRepository<Book>(_collection);
+
+            // Act
+            var result = await repository
+                .Queryable()
+                .Where(b => b.BookName == "None")
+                .SingleOrDefaultAsync();
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
         public async Task Queryable_Should_Allow_Composition()
         {
             // Arrange
@@ -204,9 +414,8 @@ namespace URF.Core.EF.Tests
             var repository = new DocumentRepository<Book>(_collection);
 
             // Act
-            // Cast to IMongoQueryable<Book> in order to call ToListAsync
-            var query = (IMongoQueryable<Book>)repository.Queryable();
-            var products = await query
+            var products = await repository
+                .Queryable()
                 .Take(2)
                 .Where(b => b.Price.CompareTo(15.00m) > 0)
                 .Select(b => new MyBook
@@ -226,7 +435,7 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
-        public async Task Fluent_Api_Should_Support_Paging()
+        public async Task Queryable_Should_Support_Paging()
         {
             // Arrange
             const int page = 2;
@@ -239,14 +448,15 @@ namespace URF.Core.EF.Tests
             };
             var repository = new DocumentRepository<Book>(_collection);
             await repository.InsertManyAsync(inserted);
-            var query = (IMongoQueryable<Book>)repository.Queryable();
-            var expected = await query
+            var expected = await repository
+                .Queryable()
                 .Where(b => b.BookName == "Clean Code" || b.BookName == "Dependency Injection")
                 .OrderByDescending(b => b.BookName)
                 .ToListAsync();
 
             // Act
-            var books = await query
+            var books = await repository
+                .Queryable()
                 .OrderByDescending(b => b.BookName)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
