@@ -66,9 +66,14 @@ namespace URF.Core.EF
             return await _query.ToListAsync(cancellationToken);
         }
 
+        public virtual async Task<TEntity> FirstOrDefaultAsync(CancellationToken cancellationToken = default) => await _query.FirstOrDefaultAsync(cancellationToken);
+
         public virtual async Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.FirstOrDefaultAsync(predicate, cancellationToken);
 
+        public virtual async Task<TEntity> SingleOrDefaultAsync(CancellationToken cancellationToken = default)
+            => await _query.SingleOrDefaultAsync(cancellationToken);            
+        
         public virtual async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.SingleOrDefaultAsync(predicate, cancellationToken);
 
