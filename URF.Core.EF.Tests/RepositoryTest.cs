@@ -335,6 +335,33 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
+        public async Task FirstOrDefaultAsync_Should_Return_Entity()
+        {
+
+            // Arrange
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            var product = await repository.Query().FirstOrDefaultAsync(s => s.ProductId == 1);
+
+            // Assert
+            Assert.NotNull(product);
+
+            // Act
+            var product1 = await repository.Query().Where(p => p.CategoryId == 1).FirstOrDefaultAsync();
+
+            // Assert
+            Assert.NotNull(product1);
+
+            // Act
+            var product2 = await repository.Query().Where(p => p.CategoryId == -1).FirstOrDefaultAsync();
+
+            // Assert
+            Assert.Null(product2);
+
+        }
+
+        [Fact]
         public void Update_Should_Set_Entity_State_Modified()
         {
             // Arrange
