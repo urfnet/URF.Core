@@ -337,7 +337,32 @@ namespace URF.Core.EF.Tests
         [Fact]
         public async Task FirstOrDefaultAsync_Should_Return_Entity()
         {
+            // Arrange
+            var repository = new Repository<Product>(_fixture.Context);
 
+            // Act
+            var product = await repository.Query().Where(p => p.CategoryId == 1).FirstOrDefaultAsync();
+
+            // Assert
+            Assert.NotNull(product);
+        }
+
+        [Fact]
+        public async Task FirstOrDefaultAsync_Should_Return_Null()
+        {
+            // Arrange
+            var repository = new Repository<Product>(_fixture.Context);
+
+            // Act
+            var product = await repository.Query().Where(p => p.CategoryId == -1).FirstOrDefaultAsync();
+
+            // Assert
+            Assert.Null(product);
+        }
+
+        [Fact]
+        public async Task FirstOrDefaultAsync_With_Predicate_Should_Return_Entity()
+        {
             // Arrange
             var repository = new Repository<Product>(_fixture.Context);
 
@@ -346,19 +371,6 @@ namespace URF.Core.EF.Tests
 
             // Assert
             Assert.NotNull(product);
-
-            // Act
-            var product1 = await repository.Query().Where(p => p.CategoryId == 1).FirstOrDefaultAsync();
-
-            // Assert
-            Assert.NotNull(product1);
-
-            // Act
-            var product2 = await repository.Query().Where(p => p.CategoryId == -1).FirstOrDefaultAsync();
-
-            // Assert
-            Assert.Null(product2);
-
         }
 
         [Fact]
