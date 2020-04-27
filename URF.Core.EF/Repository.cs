@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -37,6 +38,9 @@ namespace URF.Core.EF
 
         public virtual async Task LoadPropertyAsync(TEntity item, Expression<Func<TEntity, object>> property, CancellationToken cancellationToken = default)
             => await Context.Entry(item).Reference(property).LoadAsync(cancellationToken);
+
+        public virtual async Task LoadCollectionAsync(TEntity item, Expression<Func<TEntity, IEnumerable<object>>> property, CancellationToken cancellationToken = default)
+            => await Context.Entry(item).Collection(property).LoadAsync(cancellationToken);
 
         public virtual void Attach(TEntity item)
             => Set.Attach(item);
