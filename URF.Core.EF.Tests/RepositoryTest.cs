@@ -43,7 +43,7 @@ namespace URF.Core.EF.Tests
             if (useKey)
                 product = await repository.FindAsync(1);
             else
-                product = await repository.FindAsync(new object[] {1});
+                product = await repository.FindAsync(new object[] { 1 });
 
             // Assert
             Assert.Equal(_products[0].ProductId, product.ProductId);
@@ -62,7 +62,7 @@ namespace URF.Core.EF.Tests
             if (useKey)
                 result = await repository.ExistsAsync(1);
             else
-                result = await repository.ExistsAsync(new object[] {1});
+                result = await repository.ExistsAsync(new object[] { 1 });
 
             // Assert
             Assert.True(result);
@@ -81,7 +81,7 @@ namespace URF.Core.EF.Tests
             if (useKey)
                 result = await repository.ExistsAsync(-1);
             else
-                result = await repository.ExistsAsync(new object[] {-1});
+                result = await repository.ExistsAsync(new object[] { -1 });
 
             // Assert
             Assert.False(result);
@@ -150,7 +150,7 @@ namespace URF.Core.EF.Tests
             if (useKey)
                 result = await repository.DeleteAsync(1);
             else
-                result = await repository.DeleteAsync(new object[] {1});
+                result = await repository.DeleteAsync(new object[] { 1 });
 
             // Assert
             Assert.True(result);
@@ -200,6 +200,21 @@ namespace URF.Core.EF.Tests
         }
 
         [Fact]
+        public async Task LoadCollectionAsync_Should_Load_Collection()
+        {
+            //Arrange
+            var categoryRepository = new Repository<Category>(_fixture.Context);
+            var beverageCategory = await categoryRepository.FindAsync(1);
+
+            // Act
+            await categoryRepository.LoadCollectionAsync(beverageCategory, c => c.Products);
+
+            // Assert
+            var beverageProductsCount = _products.Where(p => p.CategoryId == 1).Count();
+            Assert.Equal(beverageProductsCount, beverageCategory.Products.Count);
+        }
+
+        [Fact]
         public async Task Fluent_Api_Should_Support_Paging()
         {
             var repository = new Repository<Product>(_fixture.Context);
@@ -219,8 +234,8 @@ namespace URF.Core.EF.Tests
                 new Product {ProductId = 4, ProductName = "Chef Anton's Cajun Seasoning", CategoryId = 2, UnitPrice = 22.00m, Discontinued = false}
             };
 
-            const int page = 2; 
-            const int pageSize = 10; 
+            const int page = 2;
+            const int pageSize = 10;
 
             // Act
             var count = await repository
@@ -275,8 +290,8 @@ namespace URF.Core.EF.Tests
         {
             // Arrange
             var comparer = new MyProductComparer();
-            var expected1 = new MyProduct {Id = 1, Name = "Chai", Price = 18.00m, Category = "Beverages"};
-            var expected2 = new MyProduct {Id = 2, Name = "Chang", Price = 19.00m, Category = "Beverages"};
+            var expected1 = new MyProduct { Id = 1, Name = "Chai", Price = 18.00m, Category = "Beverages" };
+            var expected2 = new MyProduct { Id = 2, Name = "Chang", Price = 19.00m, Category = "Beverages" };
 
             var repository = new Repository<Product>(_fixture.Context);
 
@@ -285,7 +300,7 @@ namespace URF.Core.EF.Tests
             var products = await query
                 .Take(2)
                 .Include(p => p.Category)
-                .Where(p => p.UnitPrice.CompareTo(15.00m) > 0 )
+                .Where(p => p.UnitPrice.CompareTo(15.00m) > 0)
                 .Select(p => new MyProduct
                 {
                     Id = p.ProductId,
