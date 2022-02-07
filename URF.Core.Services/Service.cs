@@ -60,10 +60,10 @@ namespace URF.Core.Services
         public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters) 
             => Repository.QueryableSql(sql, parameters);
 
-        public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<System.Collections.Generic.IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default)
             => await Repository.Query().SelectAsync(cancellationToken);
 
-        public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default) 
+        public virtual async Task<System.Collections.Generic.IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default) 
             => await Repository.Query().SelectSqlAsync(sql, parameters, cancellationToken);
 
         public virtual void Update(TEntity item) 
