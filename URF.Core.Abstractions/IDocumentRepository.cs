@@ -19,7 +19,7 @@ namespace URF.Core.Abstractions
 
         Task<TEntity> InsertOneAsync(TEntity item, CancellationToken cancellationToken = default);
 
-        Task<List<TEntity>> InsertManyAsync(IEnumerable<TEntity> items, CancellationToken cancellationToken = default);
+        Task<List<TEntity>> InsertManyAsync(System.Collections.Generic.IEnumerable<TEntity> items, CancellationToken cancellationToken = default);
 
         Task<int> DeleteOneAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken = default);
 

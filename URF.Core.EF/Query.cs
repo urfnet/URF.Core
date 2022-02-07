@@ -56,7 +56,7 @@ namespace URF.Core.EF
         public virtual IQuery<TEntity> Take(int take) 
             => Set(q => q._take = take);
 
-        public virtual async Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default )
+        public virtual async Task<System.Collections.Generic.IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default )
         {
             _query = _orderedQuery ?? _query;
 
@@ -86,7 +86,7 @@ namespace URF.Core.EF
         public virtual async Task<bool> AllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default)
             => await _query.AllAsync(predicate, cancellationToken);
 
-        public virtual async Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
+        public virtual async Task<System.Collections.Generic.IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
             => await (_query as DbSet<TEntity>)?.FromSqlRaw(sql, parameters).ToListAsync(cancellationToken);
 
         private IQuery<TEntity> Set(Action<Query<TEntity>> setParameter)
