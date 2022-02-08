@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>6.0.0</Version>
+    <Version>6.0.1</Version>
     <Authors>Long Le, Tony Sneed</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/urfnet/URF.Core</PackageProjectUrl>
@@ -11,7 +11,7 @@
     <Title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): Abstractions</Title>
     <Description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</Description>
     <PackageTags>repository unitofwork service patterns</PackageTags>
-	<PackageReleaseNotes>https://github.com/urfnet/URF.Core/releases/tag/v6.0.0</PackageReleaseNotes>
+	<PackageReleaseNotes>https://github.com/urfnet/URF.Core/releases/tag/v6.0.1</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/urfnet/URF.Core</RepositoryUrl>
   </PropertyGroup>
