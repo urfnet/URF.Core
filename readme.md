@@ -11,7 +11,7 @@
 #### URF.Core RTM is Complete!
 URF.Core is feature complete and now has full parity with URF.NET (legacy .NET). URF.Core has gone through a complete rewrite with laser focus on Architecture, Design and Implementation as well as implementing top request for vNext, you can take a look at our [URF.Core.Sample](https://github.com/urfnet/URF.Core.Sample) w/ [ASP.NET Core Web API](https://github.com/aspnet/Home), [OData](https://github.com/OData/WebApi), with full CRUD samples with [Angular](https://angular.io/) and [Kendo UI](https://www.telerik.com/kendo-angular-ui/components/).
 
-#### Supported Added for MongoDb
+#### Support Added for MongoDb
 As of version 3.1.1, support has been added for NoSQL Document databases with an implementation for MongoDb.
 
 #### Samples for EF Core 3.x and MongoDb
@@ -141,7 +141,7 @@ public class ProductsController : ODataController
 }
 ```
 #### Performance
-URF.Core has been completely re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, teams will automatically get the best thread management out on asynchronous perf improvements.
+URF.Core has been completely re-written, and everything is now completely `task`, `async`, `await` right out of the box. This way, teams will automatically get the best thread management out of asynchronous perf improvements.
 
 #### URF Powered & Sponsered by:
 <table border="0" style="border:0px;none">
@@ -160,7 +160,7 @@ URF.Core has been completely re-written, and everything is now completely `task`
     </td>
    <td>
      <a href="https://www.gitkraken.com/">
-     <img src="https://www.gitkraken.com/downloads/brand-assets/gitkraken-logo-light-sq.png" />
+     <img src="https://1v5ymx3zt3y73fq5gy23rtnc-wpengine.netdna-ssl.com/wp-content/uploads/2021/12/GK-white-tagline-hz-logo.svg" width="375px">
     </a>
    </td>
   </tr>
