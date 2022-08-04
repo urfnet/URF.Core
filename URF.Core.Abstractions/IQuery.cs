@@ -13,7 +13,7 @@ namespace URF.Core.Abstractions
         IQuery<TEntity> Include(string navigationPropertyPath);
         IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> keySelector);
         IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> keySelector);
-        Task<System.Collections.Generic.IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default);
+        Task<IEnumerable<TEntity>> SelectAsync(CancellationToken cancellationToken = default);
         IQuery<TEntity> Skip(int skip);
         IQuery<TEntity> Take(int take);
         IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy);
@@ -23,7 +23,7 @@ namespace URF.Core.Abstractions
         Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
         Task<TEntity> SingleOrDefaultAsync(CancellationToken cancellationToken = default);
         Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
-        Task<System.Collections.Generic.IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default);
+        Task<IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
         Task<bool> AnyAsync(CancellationToken cancellationToken = default);
         Task<bool> AllAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
