@@ -31,10 +31,11 @@ namespace URF.Core.Mongo
             return await FindOneAsync(filter, cancellationToken);
         }
 
-        public virtual async Task<List<TEntity>> InsertManyAsync(System.Collections.Generic.IEnumerable<TEntity> items, CancellationToken cancellationToken = default)
+        public virtual async Task<List<TEntity>> InsertManyAsync(IEnumerable<TEntity> items, CancellationToken cancellationToken = default)
         {
-            await Collection.InsertManyAsync(items, null, cancellationToken);
-            return items.ToList();
+            var enumerable = items.ToList();
+            await Collection.InsertManyAsync(enumerable, null, cancellationToken);
+            return enumerable.ToList();
         }
 
         public virtual async Task<TEntity> InsertOneAsync(TEntity item, CancellationToken cancellationToken = default)

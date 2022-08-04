@@ -65,14 +65,14 @@ namespace URF.Core.EF.Tests
             // Act
             var price = 50;
             var affected = await unitOfWork.ExecuteSqlCommandAsync(
-                "UPDATE Products SET UnitPrice = {0} WHERE ProductId = {1}",
+                $"UPDATE Products SET UnitPrice = {0} WHERE ProductId = {1}",
                 new object[] { price, productId });
 
             // Assert
             Assert.Equal(1, affected);
             _fixture.Context.Entry(product).State = EntityState.Detached;
             var product1 = await _fixture.Context.Products.FindAsync(productId);
-            Assert.Equal(price, product1.UnitPrice);
+            Assert.Equal(price, product1!.UnitPrice);
         }
     }
 }

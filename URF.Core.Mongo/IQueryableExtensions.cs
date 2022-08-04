@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace URF.Core.Mongo
 {
+    // ReSharper disable once InconsistentNaming
     public static class IQueryableExtensions
     {
         public static Task<bool> AnyAsync<TEntity>(this IQueryable<TEntity> source, CancellationToken cancellationToken = default)

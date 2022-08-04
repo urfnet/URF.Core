@@ -2,34 +2,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-using URF.Core.EF.Tests.Contexts;
-using URF.Core.Mongo;
+using URF.Core.Mongo.Tests.Contexts;
 using URF.Core.Mongo.Tests.Models;
 using Xunit;
 
-namespace URF.Core.EF.Tests
+namespace URF.Core.Mongo.Tests
 {
     [Collection(nameof(MongoClient))]
     public class DocumentRepositoryTest
     {
         private readonly List<Book> _books;
-        private readonly MongoDbContextFixture _fixture;
         private readonly IMongoCollection<Book> _collection;
 
         public DocumentRepositoryTest(MongoDbContextFixture fixture)
         {
-            _fixture = fixture;
+            var fixture1 = fixture;
             var books = new List<Book>
             {
                 new Book { BookName = "Design Patterns", Price = 54.93M, Category = "Computers", Author = "Ralph Johnson" },
                 new Book { BookName = "Clean Code", Price = 43.15M, Category = "Computers", Author = "Robert C. Martin" },
             };
-            _fixture.Initialize(() =>
+            fixture1.Initialize(() =>
             {
-                _fixture.Context.GetCollection<Book>("Books").InsertMany(books);
+                fixture1.Context.GetCollection<Book>("Books").InsertMany(books);
             });
-            _collection = _fixture.Context.GetCollection<Book>("Books");
+            _collection = fixture1.Context.GetCollection<Book>("Books");
             _books = _collection.Find(e => true).ToList();
         }
 

@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using Xunit;
 
-namespace URF.Core.EF.Tests.Contexts
+namespace URF.Core.Mongo.Tests.Contexts
 {
     [CollectionDefinition(nameof(MongoClient))]
     public class MongoDbContextCollection : ICollectionFixture<MongoDbContextFixture>

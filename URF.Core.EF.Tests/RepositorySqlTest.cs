@@ -58,7 +58,7 @@ namespace URF.Core.EF.Tests
             var query = repository.QueryableSql("SELECT * FROM Products");
             var products = await query
                 .Include(p => p.Category)
-                .Where(p => (new int[] { 1, 2, 35 }).Contains(p.ProductId))
+                .Where(p => (new[] { 1, 2, 35 }).Contains(p.ProductId))
                 .Select(p => new MyProduct
                 {
                     Id = p.ProductId,
