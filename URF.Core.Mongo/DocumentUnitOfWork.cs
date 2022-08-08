@@ -7,40 +7,47 @@ namespace URF.Core.Mongo;
 
 public class DocumentUnitOfWork : IDocumentUnitOfWork, IDisposable
 {
-    private IClientSessionHandle _session;
-    private readonly IMongoDatabase _database;
+    private bool _disposed;
+    
+    protected IClientSessionHandle Session;
+    protected readonly IMongoDatabase Database;
 
     public DocumentUnitOfWork(IMongoDatabase database)
     {
-        _database = database;
+        Database = database;
     }
 
     public virtual async Task StartTransactionAsync()
     {
-        _session = await _database.Client.StartSessionAsync();
-        _session.StartTransaction();
+        Session = await Database.Client.StartSessionAsync();
+        Session.StartTransaction();
     }
 
     public virtual async Task CommitAsync()
     {
-        if (_session is not null && _session.IsInTransaction)
-        {
-            await _session.CommitTransactionAsync();
-            Dispose();
-        }
+        if (Session is not null && Session.IsInTransaction)
+            await Session.CommitTransactionAsync();
     }
 
     public virtual async Task AbortAsync()
     {
-        if (_session is not null && _session.IsInTransaction)
-        {
-            await _session.AbortTransactionAsync();
-            Dispose();
-        }
+        if (Session is not null && Session.IsInTransaction)
+            await Session.AbortTransactionAsync();
     }
 
     public void Dispose()
     {
-        _session?.Dispose();
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
+    
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+            return;
+        Session?.Dispose();
+        _disposed = true;
+    }
+    
+    ~DocumentUnitOfWork() => Dispose(disposing: false);
 }

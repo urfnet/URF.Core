@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <Version>6.1.0</Version>
+    <Version>6.1.1</Version>
     <Authors>Long Le, Tony Sneed</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/urfnet/URF.Core</PackageProjectUrl>
@@ -11,7 +11,7 @@
     <Title>URF - Unit of Work and Repositories Framework for .NET Standard and .NET Core (Official): MongoDb</Title>
     <Description>This official URF framework minimizes the surface area of your ORM technlogy from disseminating in your application. Framework provides an elegant way to implement a reusable and extensible Unit of Work and Repository pattern.</Description>
     <PackageTags>repository unitofwork patterns</PackageTags>
-	<PackageReleaseNotes>https://github.com/urfnet/URF.Core/releases/tag/v6.1.0</PackageReleaseNotes>
+	<PackageReleaseNotes>https://github.com/urfnet/URF.Core/releases/tag/v6.1.1</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.14.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
   </ItemGroup>
 
   <ItemGroup>

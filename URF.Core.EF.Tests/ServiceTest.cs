@@ -100,8 +100,8 @@ namespace URF.Core.EF.Tests
             var newCustomer = await customerRepository.FindAsync(customerId);
 
             // Assert
-            Assert.Equal(newCustomer.CustomerId, customerId);
-            Assert.Equal(newCustomer.CompanyName, companyName);
+            Assert.Equal(customerId, newCustomer.CustomerId);
+            Assert.Equal(companyName, newCustomer.CompanyName);
         }
     }
 }
