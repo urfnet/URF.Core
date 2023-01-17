@@ -65,7 +65,7 @@ namespace URF.Core.EF.Tests
             // Act
             var price = 50;
             var affected = await unitOfWork.ExecuteSqlCommandAsync(
-                $"UPDATE Products SET UnitPrice = {0} WHERE ProductId = {1}",
+                $"UPDATE Products SET UnitPrice = @p0 WHERE ProductId = @p1",
                 new object[] { price, productId });
 
             // Assert
