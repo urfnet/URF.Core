@@ -2,7 +2,7 @@
 using Mongo2Go;
 using MongoDB.Driver;
 
-namespace URF.Core.EF.Tests.Contexts
+namespace URF.Core.Mongo.Tests.Contexts
 {
     public class MongoDbContextFixture : IDisposable
     {

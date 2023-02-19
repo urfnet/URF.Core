@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -30,21 +29,25 @@ namespace URF.Core.EF
         public virtual IQuery<TEntity> OrderBy(Expression<Func<TEntity, object>> keySelector)
         {
             if (_orderedQuery == null) _orderedQuery = _query.OrderBy(keySelector);
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             else _orderedQuery.OrderBy(keySelector);
             return this;
         }
 
         public virtual IQuery<TEntity> ThenBy(Expression<Func<TEntity, object>> thenBy)
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             => Set(q => q._orderedQuery.ThenBy(thenBy));
 
         public virtual IQuery<TEntity> OrderByDescending(Expression<Func<TEntity, object>> keySelector)
         {
             if (_orderedQuery == null) _orderedQuery = _query.OrderByDescending(keySelector);
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             else _orderedQuery.OrderByDescending(keySelector);
             return this;
         }
 
         public virtual IQuery<TEntity> ThenByDescending(Expression<Func<TEntity, object>> thenByDescending)
+            // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             =>Set(q => q._orderedQuery.ThenByDescending(thenByDescending));
 
         public virtual async Task<int> CountAsync(CancellationToken cancellationToken = default )
@@ -87,7 +90,7 @@ namespace URF.Core.EF
             => await _query.AllAsync(predicate, cancellationToken);
 
         public virtual async Task<System.Collections.Generic.IEnumerable<TEntity>> SelectSqlAsync(string sql, object[] parameters, CancellationToken cancellationToken = default)
-            => await (_query as DbSet<TEntity>)?.FromSqlRaw(sql, parameters).ToListAsync(cancellationToken);
+            => await (_query as DbSet<TEntity>)?.FromSqlRaw(sql, parameters).ToListAsync(cancellationToken)!;
 
         private IQuery<TEntity> Set(Action<Query<TEntity>> setParameter)
         {

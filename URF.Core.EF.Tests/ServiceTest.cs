@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using URF.Core.Abstractions;
 using URF.Core.Abstractions.Trackable;
@@ -13,30 +12,24 @@ namespace URF.Core.EF.Tests
     [Collection(nameof(NorthwindDbContext))]
     public class ServiceTest
     {
-        private readonly List<Order> _orders;
-        private readonly List<Product> _products;
-        private readonly List<Category> _categories;
-        private readonly List<Customer> _customers;
-        private readonly List<OrderDetail> _ordersDetails;
-
         private readonly NorthwindDbContextFixture _fixture;
 
         public ServiceTest(NorthwindDbContextFixture fixture)
         {
-            _orders = Factory.Orders();
-            _products = Factory.Products();
-            _categories = Factory.Categories();
-            _customers = Factory.Customers();
-            _ordersDetails = Factory.OrderDetails();
+            var orders = Factory.Orders();
+            var products = Factory.Products();
+            var categories = Factory.Categories();
+            var customers = Factory.Customers();
+            var ordersDetails = Factory.OrderDetails();
 
             _fixture = fixture;
             _fixture.Initialize(true, () =>
             {
-                _fixture.Context.Categories.AddRange(_categories);
-                _fixture.Context.Products.AddRange(_products);
-                _fixture.Context.Customers.AddRange(_customers);
-                _fixture.Context.Orders.AddRange(_orders);
-                _fixture.Context.OrderDetails.AddRange(_ordersDetails);
+                _fixture.Context.Categories.AddRange(categories);
+                _fixture.Context.Products.AddRange(products);
+                _fixture.Context.Customers.AddRange(customers);
+                _fixture.Context.Orders.AddRange(orders);
+                _fixture.Context.OrderDetails.AddRange(ordersDetails);
                 _fixture.Context.SaveChanges();
             });
         }
@@ -107,8 +100,8 @@ namespace URF.Core.EF.Tests
             var newCustomer = await customerRepository.FindAsync(customerId);
 
             // Assert
-            Assert.Equal(newCustomer.CustomerId, customerId);
-            Assert.Equal(newCustomer.CompanyName, companyName);
+            Assert.Equal(customerId, newCustomer.CustomerId);
+            Assert.Equal(companyName, newCustomer.CompanyName);
         }
     }
 }
