@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="TrackableEntities.Common.Core" Version="6.0.0" />
+    <PackageReference Include="TrackableEntities.Common.Core" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

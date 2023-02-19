@@ -1,11 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29201.188
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33403.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81ABC12F-B290-4D02-90EF-0C879A5BD53F}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -23,9 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Abstractions.Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Services", "URF.Core.Services\URF.Core.Services.csproj", "{ED37FEA5-EBFF-4835-AF4A-9A00E1E1D442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URF.Core.Mongo", "URF.Core.Mongo\URF.Core.Mongo.csproj", "{71E5D47A-251C-45D5-9167-520515DF9F82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Mongo", "URF.Core.Mongo\URF.Core.Mongo.csproj", "{71E5D47A-251C-45D5-9167-520515DF9F82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URF.Core.Mongo.Tests", "URF.Core.Mongo.Tests\URF.Core.Mongo.Tests.csproj", "{33A75EF7-8A7C-4691-BC88-3BA86F4A6195}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "URF.Core.Mongo.Tests", "URF.Core.Mongo.Tests\URF.Core.Mongo.Tests.csproj", "{33A75EF7-8A7C-4691-BC88-3BA86F4A6195}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
