@@ -50,6 +50,9 @@ namespace URF.Core.EF
             // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
             =>Set(q => q._orderedQuery.ThenByDescending(thenByDescending));
 
+        public virtual IQuery<TEntity> GroupBy(Expression<Func<TEntity, object>> groupBy)
+            => Set(q => q._query.GroupBy(groupBy));
+
         public virtual async Task<int> CountAsync(CancellationToken cancellationToken = default )
             => await _query.CountAsync(cancellationToken);
 
